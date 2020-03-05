@@ -1,0 +1,1520 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/4/2019 2:32:33 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ACE-ITS-DT04"
+  DTS:CreatorName="ALTUSACE\dlai"
+  DTS:DTSID="{60A2BCDE-0C2F-4646-94BE-A8AA486173EE}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.4495.10"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="15_Ace_Exp-Careopps 1"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{B348C974-3011-4468-AA1B-FDB063791F8F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PROD_2]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{02CFF814-4A36-4F0A-B987-0A8AA05B0914}"
+      DTS:ObjectName="PROD_2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_PROD;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FADC210C-44A2-49D5-9BF9-9F5BD708E31A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Current Load"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[UHC_CareOpps]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  distinct
+       concat(right(year(getdate()),2),'_',[QmMsrId]) as QmMsrID
+      ,clientMemberKey as [Member_ID]
+
+      ,[QMDate]
+      
+  FROM (select * from 
+acecaredw.[adw].[QM_ResultByMember_History] where qmcntcat = 'COP' and qmdate = (select max(qmdate) from acecaredw.[adw].[QM_ResultByMember_History] )
+) a</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Connections[OleDbConnection]"
+                  connectionManagerID="{3D1B0341-403D-4032-B8CA-E171B06DEA6D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ace-sdv-db01.ACECAREDW_TEST]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QmMsrID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].ExternalColumns[QmMsrID]"
+                      length="23"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QmMsrID]"
+                      name="QmMsrID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[Member_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].ExternalColumns[Member_ID]"
+                      length="255"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[Member_ID]"
+                      name="Member_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QMDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].ExternalColumns[QMDate]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QMDate]"
+                      name="QMDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].ExternalColumns[QmMsrID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      name="QmMsrID" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].ExternalColumns[Member_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Member_ID" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].ExternalColumns[QMDate]"
+                      dataType="dbDate"
+                      name="QMDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[QmMsrID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[QmMsrID]"
+                      name="QmMsrID" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[Member_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[Member_ID]"
+                      name="Member_ID" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[QMDate]"
+                      dataType="dbDate"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[QMDate]"
+                      name="QMDate" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Inputs[Data Conversion Input].Columns[T_Deno_num]"
+                      cachedDataType="wstr"
+                      cachedLength="11"
+                      cachedName="T_Deno_num"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Output].Columns[T_Deno_num]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of T_Deno_num]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="30"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of T_Deno_num]"
+                      name="Copy of T_Deno_num"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Output].Columns[T_Deno_num]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Denominator Insert"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Output].Columns[T_Deno_num]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Output].Columns[T_Deno_num]"
+                      name="T_Deno_num"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"Denominator"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Denominator"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Output].Columns[Type]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Output].Columns[Type]"
+                      name="Type"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">2</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Inputs[Derived Column Input].Columns[QMDate]"
+                      cachedDataType="dbDate"
+                      cachedName="QMDate"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QMDate]" />
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Inputs[Derived Column Input].Columns[QmMsrID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="23"
+                      cachedName="QmMsrID"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QmMsrID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[Copy_A_LAST_UPDATE_DATE]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[Copy_A_LAST_UPDATE_DATE]"
+                      name="Copy_A_LAST_UPDATE_DATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QMDate]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">QMDate</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[run_date_manual_gen]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[run_date_manual_gen]"
+                      name="run_date_manual_gen"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[is_elig]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[is_elig]"
+                      name="is_elig"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[modify_by_daniel]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="15"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[modify_by_daniel]"
+                      name="modify_by_daniel"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,15,1252)"Daniel"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,15,1252)"Daniel"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[MeasureID_UNI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[MeasureID_UNI]"
+                      name="MeasureID_UNI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,25)#{Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QmMsrID]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,25)QmMsrID</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 2"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Existing"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup 1 1 1 1"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select t_run_id,  convert(nvarchar,ltrim(rtrim(t_rules_parent_Id))) as t_rules_parent_Id from 
+(
+select distinct t_run_id,  t_rules_parent_Id , dense_rank() over (partition by t_rules_parent_id order by t_run_id desc) as rank  from t_hedis_excu_tb where t_rules_parent_id like '%UHC%') a
+where a.rank = 1 and left(t_rules_parent_id,2) = right(year(getdate()),2)</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select t_run_id,  convert(nvarchar,ltrim(rtrim(t_rules_parent_Id))) as t_rules_parent_Id from 
+(
+select distinct t_run_id,  t_rules_parent_Id , dense_rank() over (partition by t_rules_parent_id order by t_run_id desc) as rank  from t_hedis_excu_tb where t_rules_parent_id like '%UHC%') a
+where a.rank = 1 and left(t_rules_parent_id,2) = right(year(getdate()),2)) [refTable]
+where [refTable].[t_rules_parent_Id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="t_run_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="t_rules_parent_Id" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[MeasureID_UNI]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Connections[OleDbConnection]"
+                  connectionManagerID="{0669A578-DE3E-4A6E-A85B-0BAEEB6D2605}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[PROD]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Inputs[Lookup Input].Columns[MeasureID_UNI]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="MeasureID_UNI"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[MeasureID_UNI]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">t_rules_parent_Id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Match Output].Columns[t_run_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Match Output].Columns[t_run_id]"
+                      name="t_run_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">t_run_id</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Match Output].Columns[t_rules_parent_Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="30"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Match Output].Columns[t_rules_parent_Id]"
+                      name="t_rules_parent_Id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">t_rules_parent_Id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination 1 1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[T_HEDIS_Member_TAB]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Connections[OleDbConnection]"
+                  connectionManagerID="{0669A578-DE3E-4A6E-A85B-0BAEEB6D2605}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[PROD]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].Columns[is_elig]"
+                      cachedDataType="i4"
+                      cachedName="is_elig"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Is_Eligible_Population]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[is_elig]" />
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].Columns[modify_by_daniel]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="modify_by_daniel"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Modify_By]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[modify_by_daniel]" />
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].Columns[run_date_manual_gen]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="run_date_manual_gen"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Modify_Date]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output].Columns[run_date_manual_gen]" />
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].Columns[Copy of T_Deno_num]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Copy of T_Deno_num"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Deno_Numa_Excl]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of T_Deno_num]" />
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].Columns[t_run_id]"
+                      cachedDataType="i4"
+                      cachedName="t_run_id"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Run_Id]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Match Output].Columns[t_run_id]" />
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].Columns[Type]"
+                      cachedDataType="i4"
+                      cachedName="Type"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Eligibility_Cd]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Output].Columns[Type]" />
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].Columns[QMDate]"
+                      cachedDataType="dbDate"
+                      cachedName="QMDate"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Run_Date]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QMDate]" />
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].Columns[QmMsrID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="23"
+                      cachedName="QmMsrID"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_MSR_ID]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[QmMsrID]" />
+                    <inputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].Columns[Member_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Member_ID"
+                      externalMetadataColumnId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Subscriber_ID]"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output].Columns[Member_ID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Hedis_Run_Id]"
+                      dataType="i4"
+                      name="T_Hedis_Run_Id" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Run_Date]"
+                      dataType="dbTimeStamp"
+                      name="T_Run_Date" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_MSR_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="T_MSR_ID" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Run_Id]"
+                      dataType="i4"
+                      name="T_Run_Id" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Subscriber_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="T_Subscriber_ID" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_First_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="T_First_Name" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Last_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="T_Last_Name" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_DOB]"
+                      dataType="dbTimeStamp"
+                      name="T_DOB" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Eligibility_Cd]"
+                      dataType="i8"
+                      name="T_Eligibility_Cd" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Deno_Numa_Excl]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="T_Deno_Numa_Excl" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Is_Eligible_Population]"
+                      dataType="ui1"
+                      name="T_Is_Eligible_Population" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Provider_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="T_Provider_ID" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="T_Gender" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Member_Phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="T_Member_Phone" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Member_Address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="T_Member_Address" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Modify_By]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="T_Modify_By" />
+                    <externalMetadataColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input].ExternalColumns[T_Modify_Date]"
+                      dataType="dbTimeStamp"
+                      name="T_Modify_Date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Data Conversion Output]"
+              endId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Derived Column Output]"
+              endId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Derived Column Output1]"
+              endId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Derived Column Output2]"
+              endId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Lookup Match Output]"
+              endId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Lookup No Match Output]"
+              endId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[OLE DB Source Output]"
+              endId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\set nonuhc campaign to campaigntype 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AA7E0E99-A50F-467A-BC97-568694796579}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="set nonuhc campaign to campaigntype 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0669A578-DE3E-4A6E-A85B-0BAEEB6D2605}"
+          SQLTask:SqlStatementSource="EXEC SP_SET_ALL_NONUHC_CPTYPEID_TO_1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D670B39C-F778-49FC-A0E2-AA91083D3D69}"
+      DTS:From="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\set nonuhc campaign to campaigntype 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="688,42"
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl"
+          TopLeft="60,132" />
+        <NodeLayout
+          Size="270,42"
+          Id="Package\set nonuhc campaign to campaigntype 1"
+          TopLeft="154,291" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="404,174">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-115,117"
+              Start="0,0"
+              End="-115,109.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54.5"
+                    Point2="0,58.5"
+                    Point3="-4,58.5" />
+                  <mssgle:LineSegment
+                    End="-111,58.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-111,58.5"
+                    Point2="-115,58.5"
+                    Point3="-115,62.5" />
+                  <mssgle:LineSegment
+                    End="-115,109.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="141,42"
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1"
+          TopLeft="480,722" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 1 1"
+          TopLeft="486,654" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load"
+          TopLeft="405,111" />
+        <NodeLayout
+          Size="115,42"
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Existing"
+          TopLeft="419,275" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Data Conversion"
+          TopLeft="424,446" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1"
+          TopLeft="413,846" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Derived Column 2"
+          TopLeft="701,833" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Denominator Insert"
+          TopLeft="388,366" />
+        <EdgeLayout
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[OLE DB Source Output]"
+          TopLeft="475.75,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,122"
+              Start="0,0"
+              End="0,114.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,114.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Lookup No Match Output]"
+          TopLeft="572.666666666667,764">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="205.333333333333,69"
+              Start="0,0"
+              End="205.333333333333,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.0645161290323" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.0645161290323"
+                    Point2="0,28.0645161290323"
+                    Point3="4,28.0645161290323" />
+                  <mssgle:LineSegment
+                    End="201.333333333333,28.0645161290323" />
+                  <mssgle:CubicBezierSegment
+                    Point1="201.333333333333,28.0645161290323"
+                    Point2="205.333333333333,28.0645161290323"
+                    Point3="205.333333333333,32.0645161290323" />
+                  <mssgle:LineSegment
+                    End="205.333333333333,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="37.9916276041665,33.0645161290323,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Lookup Match Output]"
+          TopLeft="528.333333333333,764">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-29.8333333333333,82"
+              Start="0,0"
+              End="-29.8333333333333,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.3520336605891" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.3520336605891"
+                    Point2="0,33.3520336605891"
+                    Point3="-4,33.3520336605891" />
+                  <mssgle:LineSegment
+                    End="-25.8333333333333,33.3520336605891" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-25.8333333333333,33.3520336605891"
+                    Point2="-29.8333333333333,33.3520336605891"
+                    Point3="-29.8333333333333,37.3520336605891" />
+                  <mssgle:LineSegment
+                    End="-29.8333333333333,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-63.1080533854167,38.3520336605891,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Derived Column Output2]"
+          TopLeft="563,696">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12.5,26"
+              Start="0,0"
+              End="-12.5,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9"
+                    Point2="0,13"
+                    Point3="-4,13" />
+                  <mssgle:LineSegment
+                    End="-8.5,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.5,13"
+                    Point2="-12.5,13"
+                    Point3="-12.5,17" />
+                  <mssgle:LineSegment
+                    End="-12.5,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Derived Column Output1]"
+          TopLeft="473.5,408">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="28.5,38"
+              Start="0,0"
+              End="28.5,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15"
+                    Point2="0,19"
+                    Point3="4,19" />
+                  <mssgle:LineSegment
+                    End="24.5,19" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.5,19"
+                    Point2="28.5,19"
+                    Point3="28.5,23" />
+                  <mssgle:LineSegment
+                    End="28.5,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Derived Column Output]"
+          TopLeft="475,317">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl.Paths[Data Conversion Output]"
+          TopLeft="502,488">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="61,166"
+              Start="0,0"
+              End="61,158.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,79"
+                    Point2="0,83"
+                    Point3="4,83" />
+                  <mssgle:LineSegment
+                    End="57,83" />
+                  <mssgle:CubicBezierSegment
+                    Point1="57,83"
+                    Point2="61,83"
+                    Point3="61,87" />
+                  <mssgle:LineSegment
+                    End="61,158.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Lookup 1 1 1 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\Current Load">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\New and Existing Insert PROD 2, look to see if it generated no match look up rows, if so please run the add new care opps etl\OLE DB Destination 1 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

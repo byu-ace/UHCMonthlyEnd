@@ -1,0 +1,1551 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/18/2017 1:18:59 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ACE-ITS-DT04"
+  DTS:CreatorName="ALTUSACE\dlai"
+  DTS:DTSID="{13059EC1-F716-4D9C-99CB-9E066B07F926}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="03_Ace-Exp-ClaimsDiag-Import"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{F3C48EAE-E370-4459-AFAD-7A88752B2B3B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW_TEST]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5E429FC8-9B31-47D4-BDCB-BB8FE9311D36}"
+      DTS:ObjectName="ace-sdv-db01.ACECAREDW_TEST">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db01;Initial Catalog=ACECAREDW_TEST;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PROD]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{60D8CBD3-0856-4ADB-8090-EED058E16092}"
+      DTS:ObjectName="PROD">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_PROD;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[QA]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3B207F23-FBB3-401E-9E96-B819283DC598}"
+      DTS:ObjectName="QA">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_QA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DEE93B23-212C-42DB-9056-8270F347E09A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="iCntClaimsInputRows">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\PROD"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9061B7F8-B8DD-4CFD-BB17-D84333C75E63}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\PROD\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CLAIMS_DIAGNOSIS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PROD\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PROD]"
+                  connectionManagerRefId="Package.ConnectionManagers[PROD]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEQ_CLAIM_ID]"
+                      cachedDataType="i8"
+                      cachedName="SEQ_CLAIM_ID"
+                      externalMetadataColumnId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEQ_CLAIM_ID]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEQ_CLAIM_ID]" />
+                    <inputColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SUBSCRIBER_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SUBSCRIBER_ID"
+                      externalMetadataColumnId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SUBSCRIBER_ID]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SUBSCRIBER_ID]" />
+                    <inputColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ICD_FLAG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ICD_FLAG"
+                      externalMetadataColumnId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ICD_FLAG]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[ICD_FLAG]" />
+                    <inputColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DIAG_SEQ_NO]"
+                      cachedDataType="i4"
+                      cachedName="DIAG_SEQ_NO"
+                      externalMetadataColumnId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_SEQ_NO]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIAG_SEQ_NO]" />
+                    <inputColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DIAG_CODE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DIAG_CODE"
+                      externalMetadataColumnId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_CODE]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIAG_CODE]" />
+                    <inputColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DIAG_POA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DIAG_POA"
+                      externalMetadataColumnId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_POA]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIAG_POA]" />
+                    <inputColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LOAD_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LOAD_DATE"
+                      externalMetadataColumnId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[LOAD_DATE]" />
+                    <inputColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LOAD_USER]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="LOAD_USER"
+                      externalMetadataColumnId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_USER]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[LOAD_USER]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[URN]"
+                      dataType="i8"
+                      name="URN" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEQ_CLAIM_ID]"
+                      dataType="i8"
+                      name="SEQ_CLAIM_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SUBSCRIBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="SUBSCRIBER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ICD_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ICD_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_SEQ_NO]"
+                      dataType="i4"
+                      name="DIAG_SEQ_NO" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DIAG_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_POA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DIAG_POA" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      name="LOAD_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="LOAD_USER" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PROD\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PROD\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PROD\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PROD\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Claims_Diags]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT       [SEQ_CLAIM_ID]	as	[SEQ_CLAIM_ID]
+      ,	           [SUBSCRIBER_ID]
+      ,[ICD_FLAG]	as	           [ICD_FLAG]
+      ,[diagNumber]	as	           [DIAG_SEQ_NO]
+      ,[diagCode]	as	           [DIAG_CODE]
+      ,[diagPoa]	as	           [DIAG_POA]
+      ,GETDATE()	as	           [LOAD_DATE]
+      ,' '	as	           [LOAD_USER]
+ FROM [ACECAREDW_TEST].[dbo].[Claims_Diags]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PROD\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW_TEST]"
+                  connectionManagerRefId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW_TEST]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEQ_CLAIM_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEQ_CLAIM_ID]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEQ_CLAIM_ID]"
+                      name="SEQ_CLAIM_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SUBSCRIBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SUBSCRIBER_ID]"
+                      length="50"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SUBSCRIBER_ID]"
+                      name="SUBSCRIBER_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[ICD_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ICD_FLAG]"
+                      length="1"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[ICD_FLAG]"
+                      name="ICD_FLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIAG_SEQ_NO]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DIAG_SEQ_NO]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIAG_SEQ_NO]"
+                      name="DIAG_SEQ_NO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIAG_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DIAG_CODE]"
+                      length="20"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIAG_CODE]"
+                      name="DIAG_CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIAG_POA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DIAG_POA]"
+                      length="20"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIAG_POA]"
+                      name="DIAG_POA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LOAD_DATE]"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[LOAD_DATE]"
+                      name="LOAD_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LOAD_USER]"
+                      length="1"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].Columns[LOAD_USER]"
+                      name="LOAD_USER"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEQ_CLAIM_ID]"
+                      dataType="i8"
+                      name="SEQ_CLAIM_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SUBSCRIBER_ID]"
+                      dataType="i4"
+                      name="SUBSCRIBER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ICD_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ICD_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DIAG_SEQ_NO]"
+                      dataType="i4"
+                      name="DIAG_SEQ_NO" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DIAG_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DIAG_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DIAG_POA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DIAG_POA" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      name="LOAD_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LOAD_USER" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEQ_CLAIM_ID]"
+                      dataType="i8"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEQ_CLAIM_ID]"
+                      name="SEQ_CLAIM_ID" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SUBSCRIBER_ID]"
+                      dataType="i4"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SUBSCRIBER_ID]"
+                      name="SUBSCRIBER_ID" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ICD_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ICD_FLAG]"
+                      name="ICD_FLAG" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DIAG_SEQ_NO]"
+                      dataType="i4"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DIAG_SEQ_NO]"
+                      name="DIAG_SEQ_NO" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DIAG_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DIAG_CODE]"
+                      name="DIAG_CODE" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DIAG_POA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DIAG_POA]"
+                      name="DIAG_POA" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LOAD_DATE]"
+                      name="LOAD_DATE" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LOAD_USER]"
+                      name="LOAD_USER" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PROD\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::iCntClaimsInputRows</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\PROD\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PROD\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\PROD\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\PROD.Paths[OLE DB Source Output]"
+              endId="Package\PROD\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\PROD\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\PROD.Paths[Row Count Output 1]"
+              endId="Package\PROD\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\PROD\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PROD TRUNC"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D699C79B-0999-4842-BA85-B7FEB3AA84C0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD TRUNC"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{60D8CBD3-0856-4ADB-8090-EED058E16092}"
+          SQLTask:SqlStatementSource="truncate table dbo.CLAIMS_DIAGNOSIS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\QA"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6fe4db9a-54d5-49e8-91f6-08db78625947}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="QA"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\QA\HIPPA"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="HIPPA"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Claims_Diags]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT       [SEQ_CLAIM_ID]	as	[SEQ_CLAIM_ID]
+      ,REPLACE(LEFT([SUBSCRIBER_ID],1),'1','A')+REPLACE(LEFT([SUBSCRIBER_ID],1),'1','B')+RIGHT(SUBSCRIBER_ID,8)	as	           [SUBSCRIBER_ID]
+      ,[ICD_FLAG]	as	           [ICD_FLAG]
+      ,[diagNumber]	as	           [DIAG_SEQ_NO]
+      ,[diagCode]	as	           [DIAG_CODE]
+      ,[diagPoa]	as	           [DIAG_POA]
+      ,GETDATE()	as	           [LOAD_DATE]
+      ,' '	as	           [LOAD_USER]
+ FROM [ACECAREDW_TEST].[dbo].[Claims_Diags]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\QA\HIPPA.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW_TEST]"
+                  connectionManagerRefId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW_TEST]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\QA\HIPPA.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[SEQ_CLAIM_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[SEQ_CLAIM_ID]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[SEQ_CLAIM_ID]"
+                      name="SEQ_CLAIM_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[SUBSCRIBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[SUBSCRIBER_ID]"
+                      length="50"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[SUBSCRIBER_ID]"
+                      name="SUBSCRIBER_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[ICD_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[ICD_FLAG]"
+                      length="1"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[ICD_FLAG]"
+                      name="ICD_FLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[DIAG_SEQ_NO]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[DIAG_SEQ_NO]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[DIAG_SEQ_NO]"
+                      name="DIAG_SEQ_NO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[DIAG_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[DIAG_CODE]"
+                      length="20"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[DIAG_CODE]"
+                      name="DIAG_CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[DIAG_POA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[DIAG_POA]"
+                      length="20"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[DIAG_POA]"
+                      name="DIAG_POA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[LOAD_DATE]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[LOAD_DATE]"
+                      name="LOAD_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[LOAD_USER]"
+                      length="1"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[LOAD_USER]"
+                      name="LOAD_USER"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[SEQ_CLAIM_ID]"
+                      dataType="i8"
+                      name="SEQ_CLAIM_ID" />
+                    <externalMetadataColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[SUBSCRIBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="SUBSCRIBER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[ICD_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ICD_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[DIAG_SEQ_NO]"
+                      dataType="i4"
+                      name="DIAG_SEQ_NO" />
+                    <externalMetadataColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[DIAG_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DIAG_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[DIAG_POA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DIAG_POA" />
+                    <externalMetadataColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      name="LOAD_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Output].ExternalColumns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LOAD_USER" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[SEQ_CLAIM_ID]"
+                      dataType="i8"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[SEQ_CLAIM_ID]"
+                      name="SEQ_CLAIM_ID" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[SUBSCRIBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[SUBSCRIBER_ID]"
+                      name="SUBSCRIBER_ID" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[ICD_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[ICD_FLAG]"
+                      name="ICD_FLAG" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[DIAG_SEQ_NO]"
+                      dataType="i4"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[DIAG_SEQ_NO]"
+                      name="DIAG_SEQ_NO" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[DIAG_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[DIAG_CODE]"
+                      name="DIAG_CODE" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[DIAG_POA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[DIAG_POA]"
+                      name="DIAG_POA" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[LOAD_DATE]"
+                      name="LOAD_DATE" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[LOAD_USER]"
+                      name="LOAD_USER" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\QA\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CLAIMS_DIAGNOSIS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\QA\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[QA]"
+                  connectionManagerRefId="Package.ConnectionManagers[QA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEQ_CLAIM_ID]"
+                      cachedDataType="i8"
+                      cachedName="SEQ_CLAIM_ID"
+                      externalMetadataColumnId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEQ_CLAIM_ID]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[SEQ_CLAIM_ID]" />
+                    <inputColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SUBSCRIBER_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SUBSCRIBER_ID"
+                      externalMetadataColumnId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SUBSCRIBER_ID]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[SUBSCRIBER_ID]" />
+                    <inputColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ICD_FLAG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ICD_FLAG"
+                      externalMetadataColumnId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ICD_FLAG]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[ICD_FLAG]" />
+                    <inputColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DIAG_SEQ_NO]"
+                      cachedDataType="i4"
+                      cachedName="DIAG_SEQ_NO"
+                      externalMetadataColumnId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_SEQ_NO]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[DIAG_SEQ_NO]" />
+                    <inputColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DIAG_CODE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DIAG_CODE"
+                      externalMetadataColumnId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_CODE]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[DIAG_CODE]" />
+                    <inputColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DIAG_POA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DIAG_POA"
+                      externalMetadataColumnId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_POA]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[DIAG_POA]" />
+                    <inputColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LOAD_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LOAD_DATE"
+                      externalMetadataColumnId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[LOAD_DATE]" />
+                    <inputColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LOAD_USER]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="LOAD_USER"
+                      externalMetadataColumnId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_USER]"
+                      lineageId="Package\QA\HIPPA.Outputs[OLE DB Source Output].Columns[LOAD_USER]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[URN]"
+                      dataType="i8"
+                      name="URN" />
+                    <externalMetadataColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEQ_CLAIM_ID]"
+                      dataType="i8"
+                      name="SEQ_CLAIM_ID" />
+                    <externalMetadataColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SUBSCRIBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="SUBSCRIBER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ICD_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ICD_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_SEQ_NO]"
+                      dataType="i4"
+                      name="DIAG_SEQ_NO" />
+                    <externalMetadataColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DIAG_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIAG_POA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DIAG_POA" />
+                    <externalMetadataColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      name="LOAD_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="LOAD_USER" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\QA\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\QA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\QA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\QA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\QA\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::iCntClaimsInputRows</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\QA\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\QA\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\QA\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\QA.Paths[OLE DB Source Output]"
+              endId="Package\QA\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\QA\HIPPA.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\QA.Paths[Row Count Output 1]"
+              endId="Package\QA\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\QA\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\QA TRUNC"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2e3591ee-7b1d-4148-aac4-f69c5f19a119}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="QA TRUNC"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3B207F23-FBB3-401E-9E96-B819283DC598}"
+          SQLTask:SqlStatementSource="truncate table dbo.CLAIMS_DIAGNOSIS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{5C7A2655-6D16-4457-8C19-9F57C65E8538}"
+      DTS:From="Package\QA"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\PROD TRUNC" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{727D99F1-1900-4DD6-8ED8-2467F5CF7FAD}"
+      DTS:From="Package\PROD TRUNC"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\PROD" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{C54E27D0-967F-4B16-BF11-DAD754BC4F3C}"
+      DTS:From="Package\QA TRUNC"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\QA" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="106,42"
+          Id="Package\PROD"
+          TopLeft="842,491" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\PROD TRUNC"
+          TopLeft="867,382" />
+        <NodeLayout
+          Size="93,42"
+          Id="Package\QA"
+          TopLeft="723,357" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\QA TRUNC"
+          TopLeft="573,287" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="638,329">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131.5,28"
+              Start="0,0"
+              End="131.5,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10"
+                    Point2="0,14"
+                    Point3="4,14" />
+                  <mssgle:LineSegment
+                    End="127.5,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="127.5,14"
+                    Point2="131.5,14"
+                    Point3="131.5,18" />
+                  <mssgle:LineSegment
+                    End="131.5,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="816,378">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="51,25"
+              Start="0,0"
+              End="43.5,25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="21.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.5,0"
+                    Point2="25.5,0"
+                    Point3="25.5,4" />
+                  <mssgle:LineSegment
+                    End="25.5,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.5,21"
+                    Point2="25.5,25"
+                    Point3="29.5,25" />
+                  <mssgle:LineSegment
+                    End="43.5,25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="938.5,424">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-43.5,67"
+              Start="0,0"
+              End="-43.5,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="-4,33.5" />
+                  <mssgle:LineSegment
+                    End="-39.5,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-39.5,33.5"
+                    Point2="-43.5,33.5"
+                    Point3="-43.5,37.5" />
+                  <mssgle:LineSegment
+                    End="-43.5,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\PROD">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\PROD\Row Count"
+          TopLeft="304,216" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\PROD\OLE DB Destination"
+          TopLeft="320,305" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\PROD\OLE DB Source"
+          TopLeft="273,119" />
+        <EdgeLayout
+          Id="Package\PROD.Paths[Row Count Output 1]"
+          TopLeft="369,258">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="36.5,47"
+              Start="0,0"
+              End="36.5,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5"
+                    Point2="0,23.5"
+                    Point3="4,23.5" />
+                  <mssgle:LineSegment
+                    End="32.5,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="32.5,23.5"
+                    Point2="36.5,23.5"
+                    Point3="36.5,27.5" />
+                  <mssgle:LineSegment
+                    End="36.5,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PROD.Paths[OLE DB Source Output]"
+          TopLeft="348,161">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="21,55"
+              Start="0,0"
+              End="21,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.5"
+                    Point2="0,27.5"
+                    Point3="4,27.5" />
+                  <mssgle:LineSegment
+                    End="17,27.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17,27.5"
+                    Point2="21,27.5"
+                    Point3="21,31.5" />
+                  <mssgle:LineSegment
+                    End="21,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\PROD\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PROD\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\QA">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\QA\OLE DB Destination"
+          TopLeft="284,334" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\QA\Row Count"
+          TopLeft="288,191" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\QA\HIPPA"
+          TopLeft="273,119" />
+        <EdgeLayout
+          Id="Package\QA.Paths[Row Count Output 1]"
+          TopLeft="353,233">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.5,101"
+              Start="0,0"
+              End="16.5,93.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46.5"
+                    Point2="0,50.5"
+                    Point3="4,50.5" />
+                  <mssgle:LineSegment
+                    End="12.5,50.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.5,50.5"
+                    Point2="16.5,50.5"
+                    Point3="16.5,54.5" />
+                  <mssgle:LineSegment
+                    End="16.5,93.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\QA.Paths[OLE DB Source Output]"
+          TopLeft="327,161">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26,30"
+              Start="0,0"
+              End="26,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11"
+                    Point2="0,15"
+                    Point3="4,15" />
+                  <mssgle:LineSegment
+                    End="22,15" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22,15"
+                    Point2="26,15"
+                    Point3="26,19" />
+                  <mssgle:LineSegment
+                    End="26,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\QA\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\QA\HIPPA">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

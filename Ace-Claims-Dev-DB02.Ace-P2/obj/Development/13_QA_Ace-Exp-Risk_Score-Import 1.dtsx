@@ -1,0 +1,813 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/27/2017 3:03:59 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ACE-ITS-DT04"
+  DTS:CreatorName="ALTUSACE\dlai"
+  DTS:DTSID="{8E8239D4-E240-4A5D-ADAA-08A23914D4BC}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="13_QA_Ace-Exp-Risk_Score-Import 1"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="81"
+  DTS:VersionGUID="{AB3C6248-58F5-4E8A-9FE4-9121378DCE5C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D081FF95-F822-416D-B001-1092DE9786A2}"
+      DTS:ObjectName="ace-sdv-db01.ACECAREDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db01;Initial Catalog=ACECAREDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PROD]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C83B697A-0B6D-4063-8F2D-FCB7C2EA67EB}"
+      DTS:ObjectName="PROD">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_PROD;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[QA]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2D6D414F-FD34-4F57-90DB-26E2A0DC4F21}"
+      DTS:ObjectName="QA">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_QA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Temp Risk Table QA"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1071D92F-C2BE-4C40-A874-2809F5AF99F0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Temp Risk Table QA"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2D6D414F-FD34-4F57-90DB-26E2A0DC4F21}"
+          SQLTask:SqlStatementSource="CREATE TABLE [dbo].[temp_Risk](&#xA; [MEMBER_ID] [varchar](50) NOT NULL,&#xA; [MBR_year] int NULL,&#xA; [MBR_MTH] int NULL,&#xA; [RISK_SCORE][varchar](20) NULL&#xA; )&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DROP Temp Risk Table QA"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1024D02A-3F26-409D-B899-527F2119206B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DROP Temp Risk Table QA"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2D6D414F-FD34-4F57-90DB-26E2A0DC4F21}"
+          SQLTask:SqlStatementSource="DROP TABLE [dbo].[temp_Risk]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Move Batch Risk Score From Risk1 to Risk 2 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{80243A87-7796-453D-89C4-E48581FF5AFD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Move Batch Risk Score From Risk1 to Risk 2 1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2D6D414F-FD34-4F57-90DB-26E2A0DC4F21}"
+          SQLTask:SqlStatementSource="update  [ACE_QA].[dbo].[R_Charlsons_Computation]&#xA;set R_Risk_Score1 = R_Risk_Score2&#xA;  where year(r_report_date)= year(getdate()) and month(r_report_date) = month(getdate())  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Populate Temp Risk Table QA"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{DB6DF3E6-BA4A-4C70-9676-DF5C8DB211E6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate Temp Risk Table QA"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate Temp Risk Table QA\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[temp_Risk]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[QA]"
+                  connectionManagerRefId="Package.ConnectionManagers[QA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IPRO_ADMIT_RISK_SCORE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="IPRO_ADMIT_RISK_SCORE"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RISK_SCORE]"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[IPRO_ADMIT_RISK_SCORE]" />
+                    <inputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REPORT_MONTH]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="REPORT_MONTH"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MBR_MTH]"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[REPORT_MONTH]" />
+                    <inputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UHC_SUBSCRIBER_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="UHC_SUBSCRIBER_ID"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MEMBER_ID]"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[UHC_SUBSCRIBER_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REPORT_YEAR]"
+                      cachedDataType="i4"
+                      cachedName="REPORT_YEAR"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MBR_year]"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[REPORT_YEAR]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MBR_MTH]"
+                      dataType="i4"
+                      name="MBR_MTH" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MEMBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MEMBER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RISK_SCORE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="RISK_SCORE" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MBR_year]"
+                      dataType="i4"
+                      name="MBR_year" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate Temp Risk Table QA\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Active_Members_All_Dev_HIPPA]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select *
+ from (
+SELECT
+            
+               IPRO_ADMIT_RISK_SCORE
+              , REPLACE(LEFT(LEFT(UHC_SUBSCRIBER_ID
+,9),1),'1','A')+REPLACE(LEFT(LEFT(UHC_SUBSCRIBER_ID
+,9),1),'1','B')+RIGHT(LEFT(UHC_SUBSCRIBER_ID
+,9),8)   as UHC_SUBSCRIBER_ID
+
+ , year(a_last_update_date) as REPORT_YEAR
+              , month(a_last_update_date) as REPORT_MONTH
+              , A_LAST_UPDATE_DATE
+            ,dense_rank() over (partition by UHC_SUBSCRIBER_ID  order by a_last_update_date desc, Ipro_admit_risk_score  desc) as seq
+         FROM dbo.UHC_Membership AS um
+		 )a
+		where a.seq = 1 and not a.UHC_SUBSCRIBER_ID = ''</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Temp Risk Table QA\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[IPRO_ADMIT_RISK_SCORE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IPRO_ADMIT_RISK_SCORE]"
+                      length="255"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[IPRO_ADMIT_RISK_SCORE]"
+                      name="IPRO_ADMIT_RISK_SCORE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[UHC_SUBSCRIBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UHC_SUBSCRIBER_ID]"
+                      length="255"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[UHC_SUBSCRIBER_ID]"
+                      name="UHC_SUBSCRIBER_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[REPORT_MONTH]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REPORT_MONTH]"
+                      length="255"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[REPORT_MONTH]"
+                      name="REPORT_MONTH"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[A_LAST_UPDATE_DATE]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[A_LAST_UPDATE_DATE]"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[A_LAST_UPDATE_DATE]"
+                      name="A_LAST_UPDATE_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[seq]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[seq]"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[seq]"
+                      name="seq"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[REPORT_YEAR]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REPORT_YEAR]"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].Columns[REPORT_YEAR]"
+                      name="REPORT_YEAR"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IPRO_ADMIT_RISK_SCORE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="IPRO_ADMIT_RISK_SCORE" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UHC_SUBSCRIBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="UHC_SUBSCRIBER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REPORT_MONTH]"
+                      dataType="i4"
+                      name="REPORT_MONTH" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[A_LAST_UPDATE_DATE]"
+                      dataType="dbDate"
+                      name="A_LAST_UPDATE_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[seq]"
+                      dataType="i8"
+                      name="seq" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REPORT_YEAR]"
+                      dataType="i4"
+                      name="REPORT_YEAR" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IPRO_ADMIT_RISK_SCORE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IPRO_ADMIT_RISK_SCORE]"
+                      name="IPRO_ADMIT_RISK_SCORE" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UHC_SUBSCRIBER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UHC_SUBSCRIBER_ID]"
+                      name="UHC_SUBSCRIBER_ID" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REPORT_YEAR]"
+                      dataType="i4"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REPORT_YEAR]"
+                      name="REPORT_YEAR" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REPORT_MONTH]"
+                      dataType="i4"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REPORT_MONTH]"
+                      name="REPORT_MONTH" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[A_LAST_UPDATE_DATE]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[A_LAST_UPDATE_DATE]"
+                      name="A_LAST_UPDATE_DATE" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[seq]"
+                      dataType="i8"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[seq]"
+                      name="seq" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate Temp Risk Table QA.Paths[OLE DB Source Output]"
+              endId="Package\Populate Temp Risk Table QA\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate Temp Risk Table QA\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Risk Score with Latest Member IPRO Risk Score QA"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1AE4F8A0-54AF-4167-A523-C128B13759E2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Risk Score with Latest Member IPRO Risk Score QA"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2D6D414F-FD34-4F57-90DB-26E2A0DC4F21}"
+          SQLTask:SqlStatementSource="&#xA;  UPDATE A&#xA;    SET A.R_Risk_Score2 = B.RISK_SCORE&#xA;FROM [R_Charlsons_Computation] A,[temp_Risk] B&#xA;WHERE A.R_Subscriber_ID = B.MEMBER_ID&#xA;and A.T_Rules_Code ='Charlson'&#xA;and Month(A.R_Report_Date) = B.MBR_MTH&#xA;and Year(A.R_Report_Date) = B.MBR_YEAR&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Wiping This Month's Risk Score QA"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F2A1269D-0445-4689-B8EE-EF52AC0620FB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Wiping This Month's Risk Score QA"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2D6D414F-FD34-4F57-90DB-26E2A0DC4F21}"
+          SQLTask:SqlStatementSource="  UPDATE  [R_Charlsons_Computation] &#xA;SET R_Risk_Score2 = 0&#xA;WHERE T_Rules_Code ='Charlson'&#xA;and Month(R_Report_Date) = Month(getdate())&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{AE99D7E9-6284-4C3A-A1DC-F4D770A9DAB5}"
+      DTS:From="Package\Wiping This Month's Risk Score QA"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3 1"
+      DTS:To="Package\Update Risk Score with Latest Member IPRO Risk Score QA" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{8CE57103-690A-40EE-A2F7-BAD84593FF9F}"
+      DTS:From="Package\DROP Temp Risk Table QA"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4 1"
+      DTS:To="Package\Create Temp Risk Table QA" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{30DE57D4-54D6-4363-8C88-BC929478D1C4}"
+      DTS:From="Package\Create Temp Risk Table QA"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Populate Temp Risk Table QA" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{455AFCAB-5478-415A-80E5-1B93BDB26369}"
+      DTS:From="Package\Populate Temp Risk Table QA"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Move Batch Risk Score From Risk1 to Risk 2 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{0E8F8C80-AB5F-481D-8A99-C16200D99586}"
+      DTS:From="Package\Move Batch Risk Score From Risk1 to Risk 2 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Wiping This Month's Risk Score QA" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Create Temp Risk Table QA"
+          TopLeft="227,379" />
+        <NodeLayout
+          Size="205,42"
+          Id="Package\DROP Temp Risk Table QA"
+          TopLeft="169,281" />
+        <NodeLayout
+          Size="298,42"
+          Id="Package\Move Batch Risk Score From Risk1 to Risk 2 1"
+          TopLeft="573,509" />
+        <NodeLayout
+          Size="219,42"
+          Id="Package\Populate Temp Risk Table QA"
+          TopLeft="611,386" />
+        <NodeLayout
+          Size="357,42"
+          Id="Package\Update Risk Score with Latest Member IPRO Risk Score QA"
+          TopLeft="555,696" />
+        <NodeLayout
+          Size="243,42"
+          Id="Package\Wiping This Month's Risk Score QA"
+          TopLeft="607,626" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3 1]"
+          TopLeft="731,668">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4 1]"
+          TopLeft="271.5,323">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="60,56"
+              Start="0,0"
+              End="60,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24"
+                    Point2="0,28"
+                    Point3="4,28" />
+                  <mssgle:LineSegment
+                    End="56,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="56,28"
+                    Point2="60,28"
+                    Point3="60,32" />
+                  <mssgle:LineSegment
+                    End="60,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="436,403.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175,0"
+              Start="0,0"
+              End="167.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="167.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="721.25,428">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,81"
+              Start="0,0"
+              End="0,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="725.25,551">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75"
+              Start="0,0"
+              End="0,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Populate Temp Risk Table QA">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Populate Temp Risk Table QA\OLE DB Source"
+          TopLeft="461,111" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Populate Temp Risk Table QA\OLE DB Destination"
+          TopLeft="495,288" />
+        <EdgeLayout
+          Id="Package\Populate Temp Risk Table QA.Paths[OLE DB Source Output]"
+          TopLeft="536,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="44.5,135"
+              Start="0,0"
+              End="44.5,127.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,63.5"
+                    Point2="0,67.5"
+                    Point3="4,67.5" />
+                  <mssgle:LineSegment
+                    End="40.5,67.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40.5,67.5"
+                    Point2="44.5,67.5"
+                    Point3="44.5,71.5" />
+                  <mssgle:LineSegment
+                    End="44.5,127.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Temp Risk Table QA\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Temp Risk Table QA\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

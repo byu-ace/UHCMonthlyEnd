@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/20/2018 4:44:00 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ACE-ITS-DT03"
+  DTS:CreatorName="ALTUSACE\gkuhfeldt"
+  DTS:DTSID="{04D31070-A12A-4723-AFE6-6DB97DBE7774}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Set up QM and Campaign batch run"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{C4A8F98A-E858-48C4-A510-8C486E55D31B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\PROD CP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{c9f10a1d-3312-49d6-9cca-1b9366cd80bf}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD CP"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0669A578-DE3E-4A6E-A85B-0BAEEB6D2605}"
+          SQLTask:SqlStatementSource="update [ACE_PROD].[dbo].[CAMPAIGN_DEFINITION_RD]&#xA;  set is_active = 0 &#xA;&#xA;   update [ACE_PROD].[dbo].[CAMPAIGN_DEFINITION_RD]&#xA;   set is_active =1, campaign_status = 'Accepted'&#xA;   where campaign_parent_child = 'PARENT' and campaign_name like '%18%'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PROD QM"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3897550F-490C-40A0-A6CC-EC3FAD1FD2C1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD QM"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0669A578-DE3E-4A6E-A85B-0BAEEB6D2605}"
+          SQLTask:SqlStatementSource="update [ACE_PROD].[dbo].[T_Rules_Config_TAB]&#xA;set status = 'I'&#xA;where t_rules_code = 'HEDIS'&#xA;&#xA;&#xA;update [ACE_PROD].[dbo].[T_Rules_Config_TAB]&#xA;set status = 'Accepted'&#xA;  where t_msr_id like '%18%' and T_IsDeleted = 0 and T_Rules_Code = 'HEDIS' and T_MSR_Description &lt;&gt;'new'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\QA CP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5F4194DC-AB4A-4C50-880E-72E8FD99C2C1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="QA CP"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DE0C8D64-110F-43FA-99B8-A5686102DEDA}"
+          SQLTask:SqlStatementSource="update [ACE_QA].[dbo].[CAMPAIGN_DEFINITION_RD]&#xA;  set is_active = 0 &#xA;&#xA;   update [ACE_QA].[dbo].[CAMPAIGN_DEFINITION_RD]&#xA;   set is_active =1, campaign_status = 'Accepted'&#xA;   where campaign_parent_child = 'PARENT' and campaign_name like '%CP_18%'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\QA QM"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{60892365-f984-41b0-973c-3d8819c3638b}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="QA QM"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DE0C8D64-110F-43FA-99B8-A5686102DEDA}"
+          SQLTask:SqlStatementSource="update [ACE_QA].[dbo].[T_Rules_Config_TAB]&#xA;set status = 'I'&#xA;where t_rules_code = 'HEDIS'&#xA;&#xA;update [ACE_QA].[dbo].[T_Rules_Config_TAB]&#xA;set status = 'Accepted'&#xA;  where t_msr_id like '%18%' and T_IsDeleted = 0 and T_Rules_Code = 'HEDIS' and T_MSR_Description &lt;&gt;'new'&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{328FFA0C-E3BD-4D65-A834-289646646AC6}"
+      DTS:From="Package\QA QM"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\PROD QM" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{E0E5C020-917A-4927-A112-915434F304A0}"
+      DTS:From="Package\PROD QM"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\QA CP" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{5D6A2838-C69C-460D-9B0C-503235D09600}"
+      DTS:From="Package\QA CP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\PROD CP" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131,42"
+          Id="Package\PROD QM"
+          TopLeft="407,217" />
+        <NodeLayout
+          Size="116,42"
+          Id="Package\QA QM"
+          TopLeft="373,134" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="431,176">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="41.5,41"
+              Start="0,0"
+              End="41.5,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="4,20.5" />
+                  <mssgle:LineSegment
+                    End="37.5,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37.5,20.5"
+                    Point2="41.5,20.5"
+                    Point3="41.5,24.5" />
+                  <mssgle:LineSegment
+                    End="41.5,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="109,42"
+          Id="Package\QA CP"
+          TopLeft="423,282" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\PROD CP"
+          TopLeft="425,353" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="475,259">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23"
+              Start="0,0"
+              End="0,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="477.5,324">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.5,29"
+              Start="0,0"
+              End="8.5,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5"
+                    Point2="0,14.5"
+                    Point3="4,14.5" />
+                  <mssgle:LineSegment
+                    End="4.5,14.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.5,14.5"
+                    Point2="8.5,14.5"
+                    Point3="8.5,18.5" />
+                  <mssgle:LineSegment
+                    End="8.5,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

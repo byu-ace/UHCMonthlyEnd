@@ -1,0 +1,1923 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/7/2017 12:46:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ACE-ITS-DT04"
+  DTS:CreatorName="ALTUSACE\dlai"
+  DTS:DTSID="{1EBC3ED8-C2E6-4F14-997E-52314067B433}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="10_Ace_Exp-List_PcpPractice"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{D757FA3A-50D1-496A-B240-1D0BC9F514CB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6B980A64-962B-4A16-9D86-F6D9EF9B25A0}"
+      DTS:ObjectName="ace-sdv-db01.ACECAREDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db01;Initial Catalog=ACECAREDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PROD]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{25B25CE9-2938-406C-B299-F20B793F07F6}"
+      DTS:ObjectName="PROD">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_PROD;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[QA]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E1E4775F-C9F1-4487-81BA-BF5F6A7FDAD8}"
+      DTS:ObjectName="QA">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_QA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\PROD"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EE297909-AEDE-4AE5-822D-0478EC8FED4F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{25B25CE9-2938-406C-B299-F20B793F07F6}"
+          SQLTask:SqlStatementSource="delete &#xA;  FROM [List_PCP_PRACTICE]&#xA;  --where load_user is null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PROD adding the front 0 for pcp npi"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E95C7728-D320-4539-A1DA-4A5BB9A2C440}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD adding the front 0 for pcp npi"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{25B25CE9-2938-406C-B299-F20B793F07F6}"
+          SQLTask:SqlStatementSource="update [ACE_PROD].[dbo].List_PCP&#xA;set pcp_practice_tin = concat('0',pcp_practice_tin)&#xA;    where &#xA;&#x9;len([PCP_PRACTICE_TIN]) = 8&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PROD adding the front 0 for practice tin"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CEBE53DF-FF4F-472E-BD6C-B47585B340DF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD adding the front 0 for practice tin"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{25B25CE9-2938-406C-B299-F20B793F07F6}"
+          SQLTask:SqlStatementSource="update [ACE_PROD].[dbo].[List_PCP_PRACTICE]&#xA;set pcp_practice_tin = concat('0',pcp_practice_tin)&#xA;    where &#xA;&#x9;len([PCP_PRACTICE_TIN]) = 8&#xA;&#xA;&#xA;&#xA;update [ACE_PROD].[dbo].List_PCP_PRACTICE&#xA;set PCP_PRACTICE_CLIENT_ID = concat('0',pcp_practice_client_id)&#xA;    where &#xA;&#x9;len(PCP_PRACTICE_CLIENT_ID) = 8&#xA;&#xA;update [ACE_PROD].[dbo].[M_MEMBER_ENR]&#xA;set pcp_practice_tin = concat('0',pcp_practice_tin)&#xA;    where &#xA;&#x9;len(pcp_practice_tin) = 8" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PROD f"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{032C5A97-2B01-4342-9361-31AD0F8F8E3B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD f"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\PROD f\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\PROD f\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PROD f\Derived Column.Inputs[Derived Column Input].Columns[AccountTIN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AccountTIN"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PROD f\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\PROD f\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[Client]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[Client]"
+                      name="Client"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,10,1252)"UHG"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,10,1252)"UHG"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[Client_PCP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="5"
+                      lineageId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[Client_PCP]"
+                      name="Client_PCP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,5,1252)"UHG"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,5,1252)"UHG"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[pract]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[pract]"
+                      name="pract"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">AccountTIN</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[active]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="5"
+                      lineageId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[active]"
+                      name="active"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,5,1252)"Y"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,5,1252)"Y"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PROD f\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\PROD f\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD f\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PROD f\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PROD f\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PROD f\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PROD f\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[List_PCP_PRACTICE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PROD f\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PROD]"
+                  connectionManagerRefId="Package.ConnectionManagers[PROD]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AccountNPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AccountNPI"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_NPI]"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountNPI]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AccountTIN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AccountTIN"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_TIN]"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AccountName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="AccountName"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_NAME]"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="ACCOUNT_PRIMARY_ADDRESS"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ADDRESS]"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_CITY]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ACCOUNT_PRIMARY_CITY"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_CITY]"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_CITY]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_STATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ACCOUNT_PRIMARY_STATE"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_STATE]"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_STATE]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="ACCOUNT_PRIMARY_ZIPCODE"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ZIP]"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ACCOUNT_PRIMARY_ADDRESS_PHONE#"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_PHONE1]"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Client]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Client"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CLIENT_ID]"
+                      lineageId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[Client]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Client_PCP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Client_PCP"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_CLIENT_ID]"
+                      lineageId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[Client_PCP]" />
+                    <inputColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[active]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="active"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACTIVE]"
+                      lineageId="Package\PROD f\Derived Column.Outputs[Derived Column Output].Columns[active]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_URN]"
+                      dataType="i8"
+                      name="PCP_PRACTICE_URN" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CLIENT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CLIENT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_TIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_TIN" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="PCP_PRACTICE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_CLIENT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_CLIENT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PCP_PRACTICE_ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ADDRESS2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_ADDRESS2" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ZIP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_ZIP" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_PHONE1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_PHONE1" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_PHONE2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_PHONE2" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_NPI" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACTIVE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LOAD_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LOAD_USER" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PROD f\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PROD f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PROD f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PROD f\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vw_List_ACEAccountProviders]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT distinct --[ACEAccountID]
+      [AccountName]
+      ,[AccountTIN]
+      --,[AccountType]
+      --,[ACEProviderID]
+    ,ACCOUNT_PRIMARY_ADDRESS,	AccountNPI,ACCOUNT_PRIMARY_CITY,	ACCOUNT_PRIMARY_STATE,	ACCOUNT_PRIMARY_ZIPCODE,	ACCOUNT_PRIMARY_POD	,ACCOUNT_PRIMARY_ADDRESS_PHONE#	--PROVIDER_PRIMARY_ADDRESS	PROVIDER_PRIMARY_CITY	PROVIDER_PRIMARY_STATE	PROVIDER_PRIMARY_ZIPCODE	PROVIDER_PRIMARY_POD	PROVIDER_PRIMARY_ADDRESS_PHONE#
+
+  FROM [ACECAREDW].[dbo].[vw_List_ACEAccountProvidersaddresses]a</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PROD f\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      length="100"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      name="AccountName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountTIN]"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]"
+                      name="AccountTIN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ADDRESS]"
+                      length="101"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      name="ACCOUNT_PRIMARY_ADDRESS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_CITY]"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_CITY]"
+                      name="ACCOUNT_PRIMARY_CITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_STATE]"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_STATE]"
+                      name="ACCOUNT_PRIMARY_STATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      length="100"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      name="ACCOUNT_PRIMARY_ZIPCODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_POD]"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_POD]"
+                      name="ACCOUNT_PRIMARY_POD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      name="ACCOUNT_PRIMARY_ADDRESS_PHONE#"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountNPI]"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountNPI]"
+                      name="AccountNPI"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="AccountName" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AccountTIN" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      name="ACCOUNT_PRIMARY_ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACCOUNT_PRIMARY_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACCOUNT_PRIMARY_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ACCOUNT_PRIMARY_ZIPCODE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACCOUNT_PRIMARY_POD" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACCOUNT_PRIMARY_ADDRESS_PHONE#" />
+                    <externalMetadataColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AccountNPI" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      name="AccountName" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountTIN]"
+                      name="AccountTIN" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      name="ACCOUNT_PRIMARY_ADDRESS" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountNPI]"
+                      name="AccountNPI" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_CITY]"
+                      name="ACCOUNT_PRIMARY_CITY" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_STATE]"
+                      name="ACCOUNT_PRIMARY_STATE" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      name="ACCOUNT_PRIMARY_ZIPCODE" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_POD]"
+                      name="ACCOUNT_PRIMARY_POD" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      name="ACCOUNT_PRIMARY_ADDRESS_PHONE#" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\PROD f.Paths[Derived Column Output]"
+              endId="Package\PROD f\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\PROD f\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\PROD f.Paths[OLE DB Source Output]"
+              endId="Package\PROD f\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\PROD f\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\QA"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E68E0CD8-17A7-4667-914B-CD75084AF5C9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="QA"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E1E4775F-C9F1-4487-81BA-BF5F6A7FDAD8}"
+          SQLTask:SqlStatementSource="delete &#xA;  FROM [List_PCP_PRACTICE]&#xA;  where load_user is null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\QA f"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B63E1A04-624C-4957-9AC0-1C815C587C6E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="QA f"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\QA f\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[List_PCP_PRACTICE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\QA f\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[QA]"
+                  connectionManagerRefId="Package.ConnectionManagers[QA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AccountNPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AccountNPI"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_NPI]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountNPI]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AccountTIN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AccountTIN"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_TIN]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AccountName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="AccountName"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_NAME]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="ACCOUNT_PRIMARY_ADDRESS"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ADDRESS]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_CITY]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ACCOUNT_PRIMARY_CITY"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_CITY]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_CITY]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_STATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ACCOUNT_PRIMARY_STATE"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_STATE]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_STATE]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="ACCOUNT_PRIMARY_ZIPCODE"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ZIP]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ACCOUNT_PRIMARY_ADDRESS_PHONE#"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_PHONE1]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_URN]"
+                      dataType="i8"
+                      name="PCP_PRACTICE_URN" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CLIENT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CLIENT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_TIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_TIN" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="PCP_PRACTICE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_CLIENT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_CLIENT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PCP_PRACTICE_ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ADDRESS2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_ADDRESS2" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_ZIP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_ZIP" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_PHONE1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_PHONE1" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_PHONE2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_PHONE2" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_NPI" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACTIVE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LOAD_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LOAD_USER" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\QA f\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vw_List_ACEAccountProviders]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT distinct --[ACEAccountID]
+      [AccountName]
+      ,[AccountTIN]
+      --,[AccountType]
+      --,[ACEProviderID]
+    ,ACCOUNT_PRIMARY_ADDRESS,	AccountNPI,ACCOUNT_PRIMARY_CITY,	ACCOUNT_PRIMARY_STATE,	ACCOUNT_PRIMARY_ZIPCODE,	ACCOUNT_PRIMARY_POD	,ACCOUNT_PRIMARY_ADDRESS_PHONE#	--PROVIDER_PRIMARY_ADDRESS	PROVIDER_PRIMARY_CITY	PROVIDER_PRIMARY_STATE	PROVIDER_PRIMARY_ZIPCODE	PROVIDER_PRIMARY_POD	PROVIDER_PRIMARY_ADDRESS_PHONE#
+
+  FROM [ACECAREDW].[dbo].[vw_List_ACEAccountProvidersaddresses]a</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\QA f\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      length="100"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      name="AccountName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountTIN]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]"
+                      name="AccountTIN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ADDRESS]"
+                      length="101"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      name="ACCOUNT_PRIMARY_ADDRESS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_CITY]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_CITY]"
+                      name="ACCOUNT_PRIMARY_CITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_STATE]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_STATE]"
+                      name="ACCOUNT_PRIMARY_STATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      length="100"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      name="ACCOUNT_PRIMARY_ZIPCODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_POD]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_POD]"
+                      name="ACCOUNT_PRIMARY_POD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      name="ACCOUNT_PRIMARY_ADDRESS_PHONE#"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountNPI]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountNPI]"
+                      name="AccountNPI"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="AccountName" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AccountTIN" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      name="ACCOUNT_PRIMARY_ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACCOUNT_PRIMARY_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACCOUNT_PRIMARY_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ACCOUNT_PRIMARY_ZIPCODE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACCOUNT_PRIMARY_POD" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACCOUNT_PRIMARY_ADDRESS_PHONE#" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AccountNPI" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      name="AccountName" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountTIN]"
+                      name="AccountTIN" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ADDRESS]"
+                      name="ACCOUNT_PRIMARY_ADDRESS" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountNPI]"
+                      name="AccountNPI" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_CITY]"
+                      name="ACCOUNT_PRIMARY_CITY" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_STATE]"
+                      name="ACCOUNT_PRIMARY_STATE" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ZIPCODE]"
+                      name="ACCOUNT_PRIMARY_ZIPCODE" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_POD]"
+                      name="ACCOUNT_PRIMARY_POD" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_PRIMARY_ADDRESS_PHONE#]"
+                      name="ACCOUNT_PRIMARY_ADDRESS_PHONE#" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\QA f.Paths[OLE DB Source Output]"
+              endId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EB79F48A-CBA9-4399-AD24-165466BCC7DF}"
+      DTS:From="Package\PROD"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\PROD f" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{82883156-E40E-461A-A11B-AD56499780D8}"
+      DTS:From="Package\QA"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\QA f" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{3003CF79-E179-48C9-9E69-672F46E388AD}"
+      DTS:From="Package\QA f"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\PROD" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{B1D2ADAC-3F95-4A80-A828-13762FE5251C}"
+      DTS:From="Package\PROD f"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\PROD adding the front 0 for practice tin" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{2C9B49A8-1CCB-4C5A-9CB4-EE4FB6F9A480}"
+      DTS:From="Package\PROD adding the front 0 for practice tin"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\PROD adding the front 0 for pcp npi" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="106,42"
+          Id="Package\PROD"
+          TopLeft="152,278" />
+        <NodeLayout
+          Size="249,42"
+          Id="Package\PROD adding the front 0 for pcp npi"
+          TopLeft="203,530" />
+        <NodeLayout
+          Size="267,42"
+          Id="Package\PROD adding the front 0 for practice tin"
+          TopLeft="146,436" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\PROD f"
+          TopLeft="196,369" />
+        <NodeLayout
+          Size="93,42"
+          Id="Package\QA"
+          TopLeft="153,39" />
+        <NodeLayout
+          Size="100,42"
+          Id="Package\QA f"
+          TopLeft="145,122" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="205,320">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47.5,49"
+              Start="0,0"
+              End="47.5,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="4,24.5" />
+                  <mssgle:LineSegment
+                    End="43.5,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="43.5,24.5"
+                    Point2="47.5,24.5"
+                    Point3="47.5,28.5" />
+                  <mssgle:LineSegment
+                    End="47.5,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="197.25,81">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="279.5,478">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="48,52"
+              Start="0,0"
+              End="48,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22"
+                    Point2="0,26"
+                    Point3="4,26" />
+                  <mssgle:LineSegment
+                    End="44,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44,26"
+                    Point2="48,26"
+                    Point3="48,30" />
+                  <mssgle:LineSegment
+                    End="48,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="252.5,411">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27,25"
+              Start="0,0"
+              End="27,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.5"
+                    Point2="0,12.5"
+                    Point3="4,12.5" />
+                  <mssgle:LineSegment
+                    End="23,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23,12.5"
+                    Point2="27,12.5"
+                    Point3="27,16.5" />
+                  <mssgle:LineSegment
+                    End="27,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="195,164">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10,114"
+              Start="0,0"
+              End="10,106.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,53"
+                    Point2="0,57"
+                    Point3="4,57" />
+                  <mssgle:LineSegment
+                    End="6,57" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6,57"
+                    Point2="10,57"
+                    Point3="10,61" />
+                  <mssgle:LineSegment
+                    End="10,106.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\PROD f">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\PROD f\OLE DB Source"
+          TopLeft="565,151" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\PROD f\Derived Column"
+          TopLeft="571,229" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\PROD f\OLE DB Destination"
+          TopLeft="542,307" />
+        <EdgeLayout
+          Id="Package\PROD f.Paths[OLE DB Source Output]"
+          TopLeft="640,193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,36"
+              Start="0,0"
+              End="8,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14"
+                    Point2="0,18"
+                    Point3="4,18" />
+                  <mssgle:LineSegment
+                    End="4,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,18"
+                    Point2="8,18"
+                    Point3="8,22" />
+                  <mssgle:LineSegment
+                    End="8,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PROD f.Paths[Derived Column Output]"
+          TopLeft="648,271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-20.5,36"
+              Start="0,0"
+              End="-20.5,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14"
+                    Point2="0,18"
+                    Point3="-4,18" />
+                  <mssgle:LineSegment
+                    End="-16.5,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-16.5,18"
+                    Point2="-20.5,18"
+                    Point3="-20.5,22" />
+                  <mssgle:LineSegment
+                    End="-20.5,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\PROD f\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PROD f\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\QA f">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\QA f\OLE DB Destination"
+          TopLeft="542,307" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\QA f\OLE DB Source"
+          TopLeft="565,151" />
+        <EdgeLayout
+          Id="Package\QA f.Paths[OLE DB Source Output]"
+          TopLeft="640,193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12.5,114"
+              Start="0,0"
+              End="-12.5,106.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,53"
+                    Point2="0,57"
+                    Point3="-4,57" />
+                  <mssgle:LineSegment
+                    End="-8.5,57" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.5,57"
+                    Point2="-12.5,57"
+                    Point3="-12.5,61" />
+                  <mssgle:LineSegment
+                    End="-12.5,106.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\QA f\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

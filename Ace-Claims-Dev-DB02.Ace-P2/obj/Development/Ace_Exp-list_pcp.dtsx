@@ -1,0 +1,2032 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/7/2017 12:46:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ACE-ITS-DT04"
+  DTS:CreatorName="ALTUSACE\dlai"
+  DTS:DTSID="{21A00A35-6507-4793-98AB-F0EDBF0C745C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.1000.169"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Ace_Exp-list_pcp"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="40"
+  DTS:VersionGUID="{7BE2D16E-5BE0-4ACA-B582-09BF33F4FD78}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E90A27C2-A5E5-45C2-BE51-1338EDF1F910}"
+      DTS:ObjectName="ace-sdv-db01.ACECAREDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db01;Initial Catalog=ACECAREDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PROD]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E988F775-F334-43CF-A05E-BEE0C1966B0A}"
+      DTS:ObjectName="PROD">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_PROD;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[QA]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{ECDEE4D5-A6AA-4C8A-BD6E-8395636EDC78}"
+      DTS:ObjectName="QA">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_QA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\PROD"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DB61E2E5-9F93-4D20-8441-A197B369A088}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E988F775-F334-43CF-A05E-BEE0C1966B0A}"
+          SQLTask:SqlStatementSource="truncate table [List_PCP]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PROD PCP NPI"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0E015328-5006-40AA-B407-42FC0BD71DBC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PROD PCP NPI"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\PROD PCP NPI\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\PROD PCP NPI\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\Derived Column.Inputs[Derived Column Input].Columns[AccountTIN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AccountTIN"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\Derived Column.Inputs[Derived Column Input].Columns[ProviderNPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProviderNPI"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderNPI]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\PROD PCP NPI\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[CLIENT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[CLIENT]"
+                      name="CLIENT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,10,1252)"UHG"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,10,1252)"UHG"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[PCP_CLIENT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[PCP_CLIENT]"
+                      name="PCP_CLIENT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,10,1252)"UHG"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,10,1252)"UHG"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[ACT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[ACT]"
+                      name="ACT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,3,1252)"Y"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,3,1252)"Y"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[URNN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="40"
+                      lineageId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[URNN]"
+                      name="URNN"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,40,1252)(#{Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]} + #{Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderNPI]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,40,1252)(AccountTIN + ProviderNPI)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\PROD PCP NPI\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PROD PCP NPI\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[List_PCP]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PROD PCP NPI\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PROD]"
+                  connectionManagerRefId="Package.ConnectionManagers[PROD]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AccountTIN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AccountTIN"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_TIN]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ProviderNPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProviderNPI"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_NPI]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderNPI]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="151"
+                      cachedName="PROVIDER_PRIMARY_ADDRESS"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP__ADDRESS]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_CITY]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROVIDER_PRIMARY_CITY"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_CITY]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_CITY]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_STATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROVIDER_PRIMARY_STATE"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_STATE]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_STATE]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="PROVIDER_PRIMARY_ZIPCODE"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_ZIP]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ZIPCODE]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROVIDER_PRIMARY_ADDRESS_PHONE#"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PHONE]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CLIENT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="CLIENT"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CLIENT_ID]"
+                      lineageId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[CLIENT]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="ACT"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACTIVE]"
+                      lineageId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[ACT]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PCP_CLIENT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="PCP_CLIENT"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_CLIENT_ID]"
+                      lineageId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output].Columns[PCP_CLIENT]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ProviderFirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProviderFirstName"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_FIRST_NAME]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderFirstName]" />
+                    <inputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ProviderLastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProviderLastName"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_LAST_NAME]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderLastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CLIENT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CLIENT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_TIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_TIN" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACTIVE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LOAD_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LOAD_USER" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_URN]"
+                      dataType="i8"
+                      name="PCP_URN" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_NPI" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_FIRST_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_MI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_MI" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_LAST_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP__ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP__ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP__ADDRESS2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP__ADDRESS2" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_ZIP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_ZIP" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PHONE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PHONE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_CLIENT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_CLIENT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRIM_SPECIALTY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PRIM_SPECIALTY" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CAMPAIGN_RUN_ID]"
+                      dataType="i4"
+                      name="CAMPAIGN_RUN_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[T_Modify_by]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="T_Modify_by" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PROD PCP NPI\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PROD PCP NPI\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PROD PCP NPI\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PROD PCP NPI\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vw_List_ACEAccountProviders]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT  row_number() over (order by accountName) as URN,[ACEAccountID]
+     , [AccountName]
+      ,[AccountTIN],
+    ProviderNPI,	ProviderName,
+ PROVIDER_PRIMARY_ADDRESS,	PROVIDER_PRIMARY_CITY	,PROVIDER_PRIMARY_STATE,	PROVIDER_PRIMARY_ZIPCODE,	ProviderFirstName, ProviderLastName,PROVIDER_PRIMARY_POD	,PROVIDER_PRIMARY_ADDRESS_PHONE#
+
+  FROM [ACECAREDW].[dbo].[vw_List_ACEAccountProvidersaddresses]a</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PROD PCP NPI\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      length="100"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      name="AccountName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountTIN]"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]"
+                      name="AccountTIN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderNPI]"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderNPI]"
+                      name="ProviderNPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderName]"
+                      length="101"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderName]"
+                      name="ProviderName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ADDRESS]"
+                      length="151"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      name="PROVIDER_PRIMARY_ADDRESS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_CITY]"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_CITY]"
+                      name="PROVIDER_PRIMARY_CITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_STATE]"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_STATE]"
+                      name="PROVIDER_PRIMARY_STATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ZIPCODE]"
+                      length="100"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      name="PROVIDER_PRIMARY_ZIPCODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_POD]"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_POD]"
+                      name="PROVIDER_PRIMARY_POD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      name="PROVIDER_PRIMARY_ADDRESS_PHONE#"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[URN]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[URN]"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[URN]"
+                      name="URN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACEAccountID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACEAccountID]"
+                      length="10"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACEAccountID]"
+                      name="ACEAccountID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderFirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderFirstName]"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderFirstName]"
+                      name="ProviderFirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderLastName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderLastName]"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderLastName]"
+                      name="ProviderLastName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="AccountName" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AccountTIN" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ProviderNPI" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      name="ProviderName" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="151"
+                      name="PROVIDER_PRIMARY_ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROVIDER_PRIMARY_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROVIDER_PRIMARY_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PROVIDER_PRIMARY_ZIPCODE" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROVIDER_PRIMARY_POD" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROVIDER_PRIMARY_ADDRESS_PHONE#" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[URN]"
+                      dataType="i8"
+                      name="URN" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACEAccountID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ACEAccountID" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderFirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ProviderFirstName" />
+                    <externalMetadataColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderLastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ProviderLastName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[URN]"
+                      dataType="i8"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[URN]"
+                      name="URN" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACEAccountID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACEAccountID]"
+                      name="ACEAccountID" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      name="AccountName" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountTIN]"
+                      name="AccountTIN" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderNPI]"
+                      name="ProviderNPI" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderName]"
+                      name="ProviderName" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="151"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      name="PROVIDER_PRIMARY_ADDRESS" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_CITY]"
+                      name="PROVIDER_PRIMARY_CITY" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_STATE]"
+                      name="PROVIDER_PRIMARY_STATE" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      name="PROVIDER_PRIMARY_ZIPCODE" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderFirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderFirstName]"
+                      name="ProviderFirstName" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderLastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderLastName]"
+                      name="ProviderLastName" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_POD]"
+                      name="PROVIDER_PRIMARY_POD" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      name="PROVIDER_PRIMARY_ADDRESS_PHONE#" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\PROD PCP NPI.Paths[Derived Column Output]"
+              endId="Package\PROD PCP NPI\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\PROD PCP NPI\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\PROD PCP NPI.Paths[OLE DB Source Output]"
+              endId="Package\PROD PCP NPI\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\PROD PCP NPI\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\QA"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{803EE587-070A-469F-81C2-8C809FACDA76}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="QA"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ECDEE4D5-A6AA-4C8A-BD6E-8395636EDC78}"
+          SQLTask:SqlStatementSource="truncate table list_pcp" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\QA f"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B5099E58-6771-4EC7-BE2B-94CC216D374E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="QA f"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          autoAdjustBufferSize="true"
+          version="1">
+          <components>
+            <component
+              refId="Package\QA f\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[List_PCP]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\QA f\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[QA]"
+                  connectionManagerRefId="Package.ConnectionManagers[QA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AccountTIN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AccountTIN"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_TIN]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ProviderNPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProviderNPI"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_NPI]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderNPI]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ProviderName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="ProviderName"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_FIRST_NAME]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderName]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="151"
+                      cachedName="PROVIDER_PRIMARY_ADDRESS"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP__ADDRESS]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_CITY]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROVIDER_PRIMARY_CITY"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_CITY]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_CITY]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_STATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROVIDER_PRIMARY_STATE"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_STATE]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_STATE]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="PROVIDER_PRIMARY_ZIPCODE"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_ZIP]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ZIPCODE]" />
+                    <inputColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROVIDER_PRIMARY_ADDRESS_PHONE#"
+                      externalMetadataColumnId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PHONE]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CLIENT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CLIENT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PRACTICE_TIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PRACTICE_TIN" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACTIVE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LOAD_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_USER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LOAD_USER" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_URN]"
+                      dataType="i8"
+                      name="PCP_URN" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_NPI" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_FIRST_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_MI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_MI" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_LAST_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP__ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP__ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP__ADDRESS2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP__ADDRESS2" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_ZIP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_ZIP" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_PHONE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_PHONE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PCP_CLIENT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PCP_CLIENT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRIM_SPECIALTY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PRIM_SPECIALTY" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CAMPAIGN_RUN_ID]"
+                      dataType="i4"
+                      name="CAMPAIGN_RUN_ID" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[T_Modify_by]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="T_Modify_by" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\QA f\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\QA f\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vw_List_ACEAccountProviders]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT distinct ProviderNPI as URN,[ACEAccountID]
+     , [AccountName]
+      ,[AccountTIN],
+    ProviderNPI,	ProviderName,
+ PROVIDER_PRIMARY_ADDRESS,	PROVIDER_PRIMARY_CITY	,PROVIDER_PRIMARY_STATE,	PROVIDER_PRIMARY_ZIPCODE,	PROVIDER_PRIMARY_POD	,PROVIDER_PRIMARY_ADDRESS_PHONE#
+
+  FROM [ACECAREDW].[dbo].[vw_List_ACEAccountProvidersaddresses]a</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\QA f\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      length="100"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      name="AccountName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountTIN]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountTIN]"
+                      name="AccountTIN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderNPI]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderNPI]"
+                      name="ProviderNPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderName]"
+                      length="101"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProviderName]"
+                      name="ProviderName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ADDRESS]"
+                      length="151"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      name="PROVIDER_PRIMARY_ADDRESS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_CITY]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_CITY]"
+                      name="PROVIDER_PRIMARY_CITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_STATE]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_STATE]"
+                      name="PROVIDER_PRIMARY_STATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ZIPCODE]"
+                      length="100"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      name="PROVIDER_PRIMARY_ZIPCODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_POD]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_POD]"
+                      name="PROVIDER_PRIMARY_POD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      name="PROVIDER_PRIMARY_ADDRESS_PHONE#"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[URN]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[URN]"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[URN]"
+                      name="URN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACEAccountID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACEAccountID]"
+                      length="10"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACEAccountID]"
+                      name="ACEAccountID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="AccountName" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AccountTIN" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ProviderNPI" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProviderName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      name="ProviderName" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="151"
+                      name="PROVIDER_PRIMARY_ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROVIDER_PRIMARY_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROVIDER_PRIMARY_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PROVIDER_PRIMARY_ZIPCODE" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROVIDER_PRIMARY_POD" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROVIDER_PRIMARY_ADDRESS_PHONE#" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[URN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="URN" />
+                    <externalMetadataColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACEAccountID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ACEAccountID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[URN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[URN]"
+                      name="URN" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACEAccountID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACEAccountID]"
+                      name="ACEAccountID" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      name="AccountName" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountTIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountTIN]"
+                      name="AccountTIN" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderNPI]"
+                      name="ProviderNPI" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProviderName]"
+                      name="ProviderName" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="151"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ADDRESS]"
+                      name="PROVIDER_PRIMARY_ADDRESS" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_CITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_CITY]"
+                      name="PROVIDER_PRIMARY_CITY" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_STATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_STATE]"
+                      name="PROVIDER_PRIMARY_STATE" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ZIPCODE]"
+                      name="PROVIDER_PRIMARY_ZIPCODE" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_POD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_POD]"
+                      name="PROVIDER_PRIMARY_POD" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROVIDER_PRIMARY_ADDRESS_PHONE#]"
+                      name="PROVIDER_PRIMARY_ADDRESS_PHONE#" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\QA f.Paths[OLE DB Source Output]"
+              endId="Package\QA f\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\QA f\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8A516918-F798-4F29-905D-0ED3F74ABFC5}"
+      DTS:From="Package\PROD"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\PROD PCP NPI" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{74FA7A02-7C1B-442E-84CA-4BB08003D9B3}"
+      DTS:From="Package\QA"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\QA f" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{64637FDE-077E-4652-81D7-DA9FD7163B13}"
+      DTS:From="Package\PROD PCP NPI"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\QA" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="106,42"
+          Id="Package\PROD"
+          TopLeft="195,67" />
+        <NodeLayout
+          Size="148,42"
+          Id="Package\PROD PCP NPI"
+          TopLeft="344,130" />
+        <NodeLayout
+          Size="93,42"
+          Id="Package\QA"
+          TopLeft="484,198" />
+        <NodeLayout
+          Size="100,42"
+          Id="Package\QA f"
+          TopLeft="628,257" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="301,88">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43,63"
+              Start="0,0"
+              End="35.5,63">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="17.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17.5,0"
+                    Point2="21.5,0"
+                    Point3="21.5,4" />
+                  <mssgle:LineSegment
+                    End="21.5,59" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.5,59"
+                    Point2="21.5,63"
+                    Point3="25.5,63" />
+                  <mssgle:LineSegment
+                    End="35.5,63" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="577,219">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="51,59"
+              Start="0,0"
+              End="43.5,59">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="21.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.5,0"
+                    Point2="25.5,0"
+                    Point3="25.5,4" />
+                  <mssgle:LineSegment
+                    End="25.5,55" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.5,55"
+                    Point2="25.5,59"
+                    Point3="29.5,59" />
+                  <mssgle:LineSegment
+                    End="43.5,59" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="418,172">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="112.5,26"
+              Start="0,0"
+              End="112.5,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9"
+                    Point2="0,13"
+                    Point3="4,13" />
+                  <mssgle:LineSegment
+                    End="108.5,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="108.5,13"
+                    Point2="112.5,13"
+                    Point3="112.5,17" />
+                  <mssgle:LineSegment
+                    End="112.5,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\PROD PCP NPI">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\PROD PCP NPI\OLE DB Source"
+          TopLeft="565,151" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\PROD PCP NPI\Derived Column"
+          TopLeft="563,266" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\PROD PCP NPI\OLE DB Destination"
+          TopLeft="554,368" />
+        <EdgeLayout
+          Id="Package\PROD PCP NPI.Paths[OLE DB Source Output]"
+          TopLeft="640,193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73"
+              Start="0,0"
+              End="0,65.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PROD PCP NPI.Paths[Derived Column Output]"
+          TopLeft="639.75,308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\PROD PCP NPI\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PROD PCP NPI\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\QA f">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\QA f\OLE DB Source"
+          TopLeft="565,151" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\QA f\OLE DB Destination"
+          TopLeft="542,307" />
+        <EdgeLayout
+          Id="Package\QA f.Paths[OLE DB Source Output]"
+          TopLeft="640,193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12.5,114"
+              Start="0,0"
+              End="-12.5,106.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,53"
+                    Point2="0,57"
+                    Point3="-4,57" />
+                  <mssgle:LineSegment
+                    End="-8.5,57" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.5,57"
+                    Point2="-12.5,57"
+                    Point3="-12.5,61" />
+                  <mssgle:LineSegment
+                    End="-12.5,106.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\QA f\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\QA f\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1124 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/25/2017 12:47:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ACE-ITS-DT04"
+  DTS:CreatorName="ALTUSACE\dlai"
+  DTS:DTSID="{244C68EA-6717-445B-AEBA-A9456B1D9DA3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="14_PROD_Add New CO_Ace_Exp-Careopps 2"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="174"
+  DTS:VersionGUID="{9974247D-B4C4-4419-A26C-07A2CA1DDA85}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AB6DCAC7-5592-46C1-8B40-641DADF614CE}"
+      DTS:ObjectName="ace-sdv-db01.ACECAREDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db01;Initial Catalog=ACECAREDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{789EAD07-1DA9-4EEC-AF44-27755469AC82}"
+      DTS:ObjectName="ace-sdv-db01.ACECAREDW 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db01;Initial Catalog=ACECAREDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PROD_1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D8D9D267-204E-4B4E-BF1F-1DD2D121B787}"
+      DTS:ObjectName="PROD_1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_PROD;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PROD_2]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{55576BD6-FB7C-4293-A9F2-D2D94F89DC04}"
+      DTS:ObjectName="PROD_2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_PROD;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[QA_1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1DF0A3C4-6A96-4CAE-9C2E-C37223041C6F}"
+      DTS:ObjectName="QA_1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_QA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[QA_2]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{95B52253-A83F-4835-9D42-088E888525D5}"
+      DTS:ObjectName="QA_2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ace-sdv-db02;Initial Catalog=ACE_QA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5642EEAF-5E9C-43EC-99E0-8E31B740820F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="int_run_id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\add campaign def and summary PROD"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EA6E64ED-FB39-4FC7-8BFB-473A1B64D759}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="add campaign def and summary PROD"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0669A578-DE3E-4A6E-A85B-0BAEEB6D2605}"
+          SQLTask:SqlStatementSource="INSERT INTO [ACE_PROD].[dbo].[CAMPAIGN_DEFINITION_RD]&#xA;(  [CAMPAIGN_NAME]&#xA;      ,[CAMPAIGN_DESC]&#xA;      ,[IS_ACTIVE]&#xA;      ,[CAMPAIGN_TYPE_ID]&#xA;      ,[CAMPAIGN_PROG_ID]&#xA;      ,[CAMPAIGN_START_DT]&#xA;      ,[CAMPAIGN_RUN_FREQ]&#xA;      ,[CLIENT_ID]&#xA;      ,[CAMPAIGN_PURPOSE]&#xA;      ,[CAMPAIGN_CREATE_BY]&#xA;      ,[CAMPAIGN_CREATE_DT]&#xA;      ,[LAST_MODIFY_DT]&#xA;      ,[LAST_MODIFY_BY]&#xA;      ,[CAMPAIGN_OUTPUT_FORMAT]&#xA;      ,[CAMPAIGN_OUTPUT_FIELDS]&#xA;      ,[CAMPAIGN_STATUS]&#xA;      ,[VENDOR_ID]&#xA;      ,[TARGET_PERCENTAGE])&#xA;&#xA;&#xA;select b.T_MSR_ID as [CAMPAIGN_NAME]&#xA;      ,b.meas_desc            as [CAMPAIGN_DESC]&#xA;      ,[IS_ACTIVE]&#xA;      ,[CAMPAIGN_TYPE_ID]&#xA;      ,[CAMPAIGN_PROG_ID]&#xA;      ,getdate() as [CAMPAIGN_START_DT]&#xA;      ,15 as[CAMPAIGN_RUN_FREQ]&#xA;      ,[CLIENT_ID]&#xA;      ,[CAMPAIGN_PURPOSE]&#xA;      ,[CAMPAIGN_CREATE_BY]&#xA;      ,getdate() as[CAMPAIGN_CREATE_DT]&#xA;      ,getdate() as[LAST_MODIFY_DT]&#xA;      ,[LAST_MODIFY_BY]&#xA;      ,'CSV' as [CAMPAIGN_OUTPUT_FORMAT]&#xA;      ,[CAMPAIGN_OUTPUT_FIELDS]&#xA;      ,[CAMPAIGN_STATUS]&#xA;      ,1 as [VENDOR_ID]&#xA;      ,[TARGET_PERCENTAGE]&#xA;  FROM [ACE_PROD].[dbo].[CAMPAIGN_DEFINITION_RD]a&#xA;&#xA;join &#xA;&#xA;  (&#xA;select 496 as campaign_id, CONCAT('CP_',[T_MSR_ID]) as T_MSR_ID,CONCAT(CO_LONG_DESC,' 2018') as meas_desc from &#xA;[ACE_PROD].[dbo].[List_CARE_OPPORTUNITIES]a&#xA;left join &#xA;(&#xA;SELECT distinct [T_MSR_ID]&#xA;    &#xA; -- FROM [ACE_PROD].[dbo].[T_Rules_Criteria_TAB]  where t_msr_id like '%17%'  --for non uhc Campaigns&#xA; FROM [ACE_PROD].[dbo].[T_Rules_Config_TAB]  where t_msr_id not in (  select distinct right(campaign_name, len(campaign_name)-3)&#xA;  FROM [ACE_PROD].[dbo].[CAMPAIGN_DEFINITION_RD]a&#xA;  where left(campaign_name,2) = 'CP')and t_msr_id like '%UHC%' -- for uhc campaigns&#xA;  )b on a.MEASURE_ID = b.T_MSR_ID&#xA;  where not t_msr_id is null) b on a.CAMPAIGN_ID = b.campaign_id&#xA;  where a.CAMPAIGN_ID =496&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  INSERT INTO [ACE_PROD].[dbo].[CAMPAIGN_SUMMARY_RD]&#xA;           ([CAMPAIGN_ID]&#xA;           ,[CRITERIA_ID]&#xA;           ,[SEQ_NUM]&#xA;           ,[PARAMETER_1]&#xA;           ,[PARAMETER_2]&#xA;           ,[PARAMETER_3]&#xA;           ,[PARAMETER_4]&#xA;           ,[PARAMETER_5]&#xA;     ,[RESULT]&#xA;           ,[CAMPAIGN_RUN_BY]&#xA;           ,[OPERATOR])&#xA;&#xA;SELECT b.[CAMPAIGN_ID]&#xA;    ,case when SEQ_NUM = 1 then 14 else 8 end as [CRITERIA_ID]&#xA;      ,[SEQ_NUM]&#xA;      ,case when [CRITERIA_ID] = 8 then MSR_NAME when [CRITERIA_ID] = 2 then [PARAMETER_3] else [PARAMETER_3] end as [PARAMETER_1]&#xA;      ,[PARAMETER_3] as  [PARAMETER_2]&#xA;      ,[PARAMETER_3]&#xA;      ,[PARAMETER_4]&#xA;      ,[PARAMETER_5]&#xA;   ,0 as [RESULT]&#xA;      ,[CAMPAIGN_RUN_BY]&#xA;      ,[OPERATOR]&#xA;  FROM [ACE_PROD].[dbo].[CAMPAIGN_SUMMARY_RD]a&#xA;&#xA;join (&#xA;&#xA;&#xA;select 496 as camp_for_join, campaign_id, campaign_name, MSR_NAME,campaign_desc from [ACE_PROD].[dbo].CAMPAIGN_DEFINITION_RD a&#xA;join (&#xA;select CONCAT('CP_',[T_MSR_ID]) as T_MSR_ID,T_MSR_ID as MSR_NAME, CONCAT(CO_LONG_DESC,' 2018') as Camp_desc from &#xA;[ACE_PROD].[dbo].[List_CARE_OPPORTUNITIES]a&#xA;left join &#xA;(&#xA;SELECT distinct [T_MSR_ID]&#xA;    &#xA; -- FROM [ACE_PROD].[dbo].[T_Rules_Criteria_TAB] where t_msr_id like '%17%'  -- for non uhc campaigns &#xA; FROM [ACE_PROD].[dbo].[T_Rules_Config_TAB]   where t_msr_id not in (  select distinct [PARAMETER_1]&#xA;  FROM  [ACE_PROD].[dbo].[CAMPAIGN_SUMMARY_RD] a&#xA;)and t_msr_id like '%UHC%' &#xA;  )b on a.MEASURE_ID = b.T_MSR_ID&#xA;  where not t_msr_id is null&#xA;&#xA;  )b on a.CAMPAIGN_NAME = b.T_MSR_ID&#xA;&#xA;&#xA;) b on a.CAMPAIGN_ID = b.camp_for_join&#xA;where a.campaign_id =496&#xA;&#xA;&#xA;update  [ACE_PROD].[dbo].[CAMPAIGN_DEFINITION_RD] &#xA;set CAMPAIGN_PARENT_CHILD  ='PARENT' , IS_ACTIVE = 1&#xA;where left(campaign_name,5) =  concat('CP_', right(year(getdate()),2))&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create temp_QM_CareOpps_Map"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{AA49CA3E-F947-4EF3-9698-49CD0E1FF006}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create temp_QM_CareOpps_Map"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TMP_ACE_QM_MAPPING]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PROD_2]"
+                  connectionManagerRefId="Package.ConnectionManagers[PROD_2]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Source]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Source"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SOURCE]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[Source]" />
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SOURCE_MEASURE_NAME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="SOURCE_MEASURE_NAME"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SOURCE_MEASURE_NAME]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[SOURCE_MEASURE_NAME]" />
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SOURCE_SUB_MEASURE_NAME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="SOURCE_SUB_MEASURE_NAME"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SOURCE_SUB_MEASURE_NAME]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[SOURCE_SUB_MEASURE_NAME]" />
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DESTINATION]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="DESTINATION"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DESTINATION]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[DESTINATION]" />
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DESTINATION_PROGRAM_NAME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="DESTINATION_PROGRAM_NAME"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DESTINATION_PROGRAM_NAME]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[DESTINATION_PROGRAM_NAME]" />
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[A_LAST_UPDATE_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="A_LAST_UPDATE_DATE"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[A_LAST_UPDATE_DATE]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[A_LAST_UPDATE_DATE]" />
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[A_LAST_UPDATE_BY]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="A_LAST_UPDATE_BY"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[A_LAST_UPDATE_BY]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[A_LAST_UPDATE_BY]" />
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IS_ACTIVE]"
+                      cachedDataType="i4"
+                      cachedName="IS_ACTIVE"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IS_ACTIVE]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[IS_ACTIVE]" />
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Criteria]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Criteria"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Criteria]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[Criteria]" />
+                    <inputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACE_PROG_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ACE_PROG_ID"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACE_PROG_ID]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACE_PROG_ID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[URN]"
+                      dataType="i8"
+                      name="URN" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SOURCE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SOURCE" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SOURCE_MEASURE_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="SOURCE_MEASURE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SOURCE_SUB_MEASURE_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="SOURCE_SUB_MEASURE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DESTINATION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DESTINATION" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DESTINATION_PROGRAM_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DESTINATION_PROGRAM_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[A_LAST_UPDATE_DATE]"
+                      dataType="dbTimeStamp"
+                      name="A_LAST_UPDATE_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[A_LAST_UPDATE_BY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="A_LAST_UPDATE_BY" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IS_ACTIVE]"
+                      dataType="i4"
+                      name="IS_ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Criteria]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Criteria" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACE_PROG_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ACE_PROG_ID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\create temp_QM_CareOpps_Map\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select 'UHC' as Source 
+      , MeasureDesc as [SOURCE_MEASURE_NAME]
+      ,NULL as [SOURCE_SUB_MEASURE_NAME]
+      ,'INFINITE' as [DESTINATION]
+      ,MeasureID as [DESTINATION_PROGRAM_NAME]
+      ,getdate() as [A_LAST_UPDATE_DATE]
+      ,'DANIEL' as [A_LAST_UPDATE_BY]
+      ,1 as [IS_ACTIVE]
+      ,'' as [Criteria]
+      ,'' as [ACE_PROG_ID] from (
+select distinct concat('19_',MeasureID) as MeasureID, MeasureDesc from 
+[ACECAREDW].[lst].[lstCareOpToPlan] where MeasureID not in ('unkn_UHC')
+) a</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[ace-sdv-db01.ACECAREDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[SOURCE_MEASURE_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SOURCE_MEASURE_NAME]"
+                      length="1000"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[SOURCE_MEASURE_NAME]"
+                      name="SOURCE_MEASURE_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[SOURCE_SUB_MEASURE_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SOURCE_SUB_MEASURE_NAME]"
+                      length="1000"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[SOURCE_SUB_MEASURE_NAME]"
+                      name="SOURCE_SUB_MEASURE_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[DESTINATION]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DESTINATION]"
+                      length="50"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[DESTINATION]"
+                      name="DESTINATION"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[DESTINATION_PROGRAM_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DESTINATION_PROGRAM_NAME]"
+                      length="1000"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[DESTINATION_PROGRAM_NAME]"
+                      name="DESTINATION_PROGRAM_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[A_LAST_UPDATE_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[A_LAST_UPDATE_DATE]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[A_LAST_UPDATE_DATE]"
+                      name="A_LAST_UPDATE_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[A_LAST_UPDATE_BY]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[A_LAST_UPDATE_BY]"
+                      length="50"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[A_LAST_UPDATE_BY]"
+                      name="A_LAST_UPDATE_BY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[IS_ACTIVE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IS_ACTIVE]"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[IS_ACTIVE]"
+                      name="IS_ACTIVE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[Criteria]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Criteria]"
+                      length="10"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[Criteria]"
+                      name="Criteria"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACE_PROG_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACE_PROG_ID]"
+                      length="50"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACE_PROG_ID]"
+                      name="ACE_PROG_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Source]"
+                      length="3"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].Columns[Source]"
+                      name="Source"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SOURCE_MEASURE_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      name="SOURCE_MEASURE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SOURCE_SUB_MEASURE_NAME]"
+                      dataType="i4"
+                      name="SOURCE_SUB_MEASURE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DESTINATION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="DESTINATION" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DESTINATION_PROGRAM_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      name="DESTINATION_PROGRAM_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[A_LAST_UPDATE_DATE]"
+                      dataType="dbTimeStamp"
+                      name="A_LAST_UPDATE_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[A_LAST_UPDATE_BY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="A_LAST_UPDATE_BY" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IS_ACTIVE]"
+                      dataType="i4"
+                      name="IS_ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Criteria]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Criteria" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACE_PROG_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ACE_PROG_ID" />
+                    <externalMetadataColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Source" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Source]"
+                      name="Source" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SOURCE_MEASURE_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SOURCE_MEASURE_NAME]"
+                      name="SOURCE_MEASURE_NAME" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SOURCE_SUB_MEASURE_NAME]"
+                      dataType="i4"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SOURCE_SUB_MEASURE_NAME]"
+                      name="SOURCE_SUB_MEASURE_NAME" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DESTINATION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DESTINATION]"
+                      name="DESTINATION" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DESTINATION_PROGRAM_NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DESTINATION_PROGRAM_NAME]"
+                      name="DESTINATION_PROGRAM_NAME" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[A_LAST_UPDATE_DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[A_LAST_UPDATE_DATE]"
+                      name="A_LAST_UPDATE_DATE" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[A_LAST_UPDATE_BY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[A_LAST_UPDATE_BY]"
+                      name="A_LAST_UPDATE_BY" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IS_ACTIVE]"
+                      dataType="i4"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IS_ACTIVE]"
+                      name="IS_ACTIVE" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Criteria]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Criteria]"
+                      name="Criteria" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACE_PROG_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACE_PROG_ID]"
+                      name="ACE_PROG_ID" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\create temp_QM_CareOpps_Map.Paths[OLE DB Source Output]"
+              endId="Package\create temp_QM_CareOpps_Map\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\create temp_QM_CareOpps_Map\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\delete bad records"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{1202DE55-EDE1-4199-824C-4EF86A0078A0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="delete bad records"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D8D9D267-204E-4B4E-BF1F-1DD2D121B787}"
+          SQLTask:SqlStatementSource="select * &#xA;  FROM [ACE_PROD].[dbo].[T_HEDIS_Member_TAB]&#xA;  where convert(date,t_run_date,101)&gt; '07/01/2018' and t_msr_id like '%UHC%'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\drop temp care opps map"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{11213FFE-74A6-4465-B6AC-2E5E1C120B76}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="drop temp care opps map"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D8D9D267-204E-4B4E-BF1F-1DD2D121B787}"
+          SQLTask:SqlStatementSource="drop table [TMP_ACE_QM_MAPPING]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\insert new measure name into ace_map_co_prog table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{47C970F3-E8A6-4E3B-96F3-C3EF72CB40AC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert new measure name into ace_map_co_prog table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AB6DCAC7-5592-46C1-8B40-641DADF614CE}"
+          SQLTask:SqlStatementSource="insert into [ACECAREDW].[dbo].[ACE_MAP_CAREOPPS_PROGRAMS]&#xA;select 'UHC' as source&#xA;&#x9;,Measure_Desc as source_measure_name&#xA;&#x9;,sub_meas as source_sub_measure_name &#xA;&#x9;, 'INFINITE' as Destination &#xA;&#x9;,  concat(right(year(getdate()),2),'_UHC_',(SELECT max(replace(b.destination_program_name, '18_UHC_' ,'') )as MeasureACRO&#xA;  FROM [ACECAREDW].[dbo].[ACE_MAP_CAREOPPS_PROGRAMS] b&#xA;  where destination = 'INFINITE' and left(destination_program_name,2) = '18' and b.SOURCE_MEASURE_NAME = a.Measure_Desc and b.SOURCE_SUB_MEASURE_NAME = a.sub_meas))  as Destination_Program_name &#xA;&#x9;, getdate() as A_last_update_date&#xA;&#x9;, 'Daniel' as A_LAST_UPDATE_BY&#xA;&#x9;, 1 as is_active &#xA;&#x9;, NULL as criteria&#xA;&#x9;, NULL as ace_prog_id&#xA; from (&#xA;SELECT distinct       [Measure_Desc]      ,[Sub_Meas]&#xA;        FROM [ACECAREDW].[dbo].[UHC_CareOpps]&#xA;&#x9;&#x9;where year(a_last_update_date) = year(getdate()) and month(a_last_update_date) = month(getdate())&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;except&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;SELECT SOURCE_MEASURE_NAME,SOURCE_SUB_MEASURE_NAME&#xA;  FROM [ACECAREDW].[dbo].[ACE_MAP_CAREOPPS_PROGRAMS]&#xA;  where destination = 'INFINITE' and left(destination_program_name,2) = right(year(getdate()),2) &#xA;&#xA;  )A&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\insert new measure name into list_care_opportunities in PROD"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{562DB284-9BAF-44BB-B11B-033C81F6B308}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert new measure name into list_care_opportunities in PROD"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{55576BD6-FB7C-4293-A9F2-D2D94F89DC04}"
+          SQLTask:SqlStatementSource="insert into [ACE_PROD].[dbo].[List_CARE_OPPORTUNITIES] &#xA;(CO_SHORT_DESC, CO_LONG_DESC,MEASURE_ID,ACTIVE,LOAD_DATE,LOAD_USER)&#xA;select concat(SOURCE_MEASURE_NAME , ' ' , SOURCE_SUB_MEASURE_NAME , ' ' ,YEAR(GETDATE())) as CO_SHORT_DESC, &#xA;&#xA;concat(SOURCE_MEASURE_NAME , ' ' , SOURCE_SUB_MEASURE_NAME , ' ' ,YEAR(GETDATE())) as CO_LONG_DESC, &#xA;DESTINATION_PROGRAM_NAME, &#xA;'Y' as active , &#xA;A_LAST_UPDATE_DATE as load_date,&#xA;NULL as LOAD_USER&#xA; from [ACE_PROD].[dbo].[TMP_ACE_QM_MAPPING]&#xA; where DESTINATION_PROGRAM_NAME not  in (&#xA; select distinct measure_id from  [ACE_PROD].[dbo].[List_CARE_OPPORTUNITIES])" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\insert new measure name into rules_config in PROD"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2FF8A386-F514-4C85-B4C2-3063CBCD9B39}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert new measure name into rules_config in PROD"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{55576BD6-FB7C-4293-A9F2-D2D94F89DC04}"
+          SQLTask:SqlStatementSource=" insert into [ACE_PROD].[dbo].[T_Rules_Config_TAB]&#xA; select &#xA; 0 as T_RULES_CONFIG_ID, &#xA; 'HEDIS' as t_rules_code,&#xA;DESTINATION_PROGRAM_NAME as t_msr_id, &#xA;DESTINATION_PROGRAM_NAME as T_MSR_PARENT_ID,&#xA; concat(SOURCE_MEASURE_NAME , ' ' , SOURCE_SUB_MEASURE_NAME , ' ' ,YEAR(GETDATE())) as T_MSR_DESCRIPTION,&#xA;'Daniel' as T_CREATED_BY,&#xA;getdate() as T_modify_dae, &#xA;'Daniel' as T_MODIFY_BY,&#xA;DESTINATION_PROGRAM_NAME as t_hedis_measure, &#xA;0 as t_isDeleted, &#xA;&#xA;'Accepted' as status , &#xA;1 as display_CO_SUmmary&#xA; from  [ACE_PROD].[dbo].[TMP_ACE_QM_MAPPING]&#xA; where DESTINATION_PROGRAM_NAME not  in (&#xA; select distinct t_msr_id  from   [ACE_PROD].[dbo].[T_Rules_Config_TAB])&#xA; and left(DESTINATION_PROGRAM_NAME,2) = right(year(getdate()),2)&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\truncate tmp QM CO Map"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{28276bfb-b123-4759-9f90-3ef181e4ae95}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="truncate tmp QM CO Map"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{55576BD6-FB7C-4293-A9F2-D2D94F89DC04}"
+          SQLTask:SqlStatementSource="truncate table TMP_ACE_QM_MAPPING" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{86E93CDE-546F-4C6F-A966-E617F5CB41B9}"
+      DTS:From="Package\create temp_QM_CareOpps_Map"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\insert new measure name into list_care_opportunities in PROD" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{F1D81780-D36E-44DA-A168-7E7DAE2463B3}"
+      DTS:From="Package\insert new measure name into ace_map_co_prog table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\truncate tmp QM CO Map" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{E16B59F4-5E85-42BD-A9D6-200BA980ADFF}"
+      DTS:From="Package\insert new measure name into list_care_opportunities in PROD"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\insert new measure name into rules_config in PROD" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
+      DTS:CreationName=""
+      DTS:DTSID="{198AF98A-D552-435E-BBFE-F158C8917286}"
+      DTS:From="Package\insert new measure name into rules_config in PROD"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 12"
+      DTS:To="Package\add campaign def and summary PROD" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{CD9DAB7C-09D7-4FB2-A9AB-8131FA0A664F}"
+      DTS:From="Package\truncate tmp QM CO Map"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\create temp_QM_CareOpps_Map" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="261,42"
+          Id="Package\add campaign def and summary PROD"
+          TopLeft="519,566" />
+        <NodeLayout
+          Size="234,42"
+          Id="Package\create temp_QM_CareOpps_Map"
+          TopLeft="480,271" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\delete bad records"
+          TopLeft="931,469" />
+        <NodeLayout
+          Size="201,42"
+          Id="Package\drop temp care opps map"
+          TopLeft="864,149" />
+        <NodeLayout
+          Size="338,42"
+          Id="Package\insert new measure name into ace_map_co_prog table"
+          TopLeft="518,0" />
+        <NodeLayout
+          Size="374,42"
+          Id="Package\insert new measure name into list_care_opportunities in PROD"
+          TopLeft="451,391" />
+        <NodeLayout
+          Size="325,42"
+          Id="Package\insert new measure name into rules_config in PROD"
+          TopLeft="489,469" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\truncate tmp QM CO Map"
+          TopLeft="480,169" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="597,313">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="41,78"
+              Start="0,0"
+              End="41,70.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35"
+                    Point2="0,39"
+                    Point3="4,39" />
+                  <mssgle:LineSegment
+                    End="37,39" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37,39"
+                    Point2="41,39"
+                    Point3="41,43" />
+                  <mssgle:LineSegment
+                    End="41,70.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="687,42">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-107.5,127"
+              Start="0,0"
+              End="-107.5,119.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,59.5"
+                    Point2="0,63.5"
+                    Point3="-4,63.5" />
+                  <mssgle:LineSegment
+                    End="-103.5,63.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-103.5,63.5"
+                    Point2="-107.5,63.5"
+                    Point3="-107.5,67.5" />
+                  <mssgle:LineSegment
+                    End="-107.5,119.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="638,433">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13.5,36"
+              Start="0,0"
+              End="13.5,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14"
+                    Point2="0,18"
+                    Point3="4,18" />
+                  <mssgle:LineSegment
+                    End="9.5,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9.5,18"
+                    Point2="13.5,18"
+                    Point3="13.5,22" />
+                  <mssgle:LineSegment
+                    End="13.5,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 12]"
+          TopLeft="650.5,511">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="579.5,211">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.5,60"
+              Start="0,0"
+              End="17.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
+                  <mssgle:LineSegment
+                    End="13.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.5,30"
+                    Point2="17.5,30"
+                    Point3="17.5,34" />
+                  <mssgle:LineSegment
+                    End="17.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="then give new measure a mneumonics&#xA;YR_CLIENT_QM in the ace_map_co_prog table, look up in hedis book "
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="395,56"
+          Id="4d469e2d-bf85-4fc0-9b4f-4646352f7284"
+          TopLeft="503,71" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\create temp_QM_CareOpps_Map">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\create temp_QM_CareOpps_Map\OLE DB Source"
+          TopLeft="499,142" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\create temp_QM_CareOpps_Map\OLE DB Destination"
+          TopLeft="508,277" />
+        <EdgeLayout
+          Id="Package\create temp_QM_CareOpps_Map.Paths[OLE DB Source Output]"
+          TopLeft="574,184">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19.5,93"
+              Start="0,0"
+              End="19.5,85.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,42.5"
+                    Point2="0,46.5"
+                    Point3="4,46.5" />
+                  <mssgle:LineSegment
+                    End="15.5,46.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.5,46.5"
+                    Point2="19.5,46.5"
+                    Point3="19.5,50.5" />
+                  <mssgle:LineSegment
+                    End="19.5,85.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\create temp_QM_CareOpps_Map\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\create temp_QM_CareOpps_Map\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

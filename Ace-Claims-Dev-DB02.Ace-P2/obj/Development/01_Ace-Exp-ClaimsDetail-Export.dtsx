@@ -1,0 +1,1396 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/18/2017 1:05:28 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ACE-ITS-DT04"
+  DTS:CreatorName="ALTUSACE\dlai"
+  DTS:DTSID="{3127111A-F10B-485E-95FA-978332AAE2EF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.4495.10"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="01_Ace-Exp-ClaimsDetail-Export"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="69"
+  DTS:VersionGUID="{812197BA-2A60-4F85-9E31-9129B51FDFE3}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FF_CONN_ClmsDetsFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{4CF755FD-9C18-4A67-ADA4-09A4D1D46177}"
+      DTS:ObjectName="FF_CONN_ClmsDetsFile">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\ace-sop-dc01\AccessData\06 ITTemplates\SSIS Packages\Ace-Claims-Test-Dev\Ace-Claims-Dev-DB02.Ace-P2\AceClmsDetails.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SEQ_CLAIM_ID"
+              DTS:DTSID="{2BCD52DA-280A-485E-BC65-F50ED282E954}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LINE_NUMBER"
+              DTS:DTSID="{9212D2EB-1EF9-47AD-B38F-1D96AE8BC78F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUB_LINE_CODE"
+              DTS:DTSID="{F3643217-69AD-4581-AF87-C245207A117C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DETAIL_SVC_DATE"
+              DTS:DTSID="{ABC7E461-7AA1-46AB-A103-F2D88E408501}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SVC_TO_DATE"
+              DTS:DTSID="{8F4089C0-AA0B-4477-AC7D-D7C8B83DD995}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PROCEDURE_CODE"
+              DTS:DTSID="{DA35A45B-EBDC-4A14-A44B-7CCEEBEFCC12}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MODIFIER_CODE_1"
+              DTS:DTSID="{99AF90BD-F523-4E4A-92DF-4BBC8576B8CC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MODIFIER_CODE_2"
+              DTS:DTSID="{C94C506F-8029-4BD9-AA42-2E498CC9E43D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MODIFIER_CODE_3"
+              DTS:DTSID="{0FC10C04-8E7E-4BAD-B79B-394D36BCD897}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MODIFIER_CODE_4"
+              DTS:DTSID="{F5C702A1-0002-4E1D-ADF4-D91C8A3C1319}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REVENUE_CODE"
+              DTS:DTSID="{05F8E799-E454-49FA-A7FA-118F3FA52788}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PLACE_OF_SVC_CODE1"
+              DTS:DTSID="{E11608B8-D41D-42EF-8DBA-E3BD087D988A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PLACE_OF_SVC_CODE2"
+              DTS:DTSID="{F843A437-8FE9-424F-BC4D-ED29DBEFF806}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PLACE_OF_SVC_CODE3"
+              DTS:DTSID="{79F2616D-8C77-4C6B-AE50-9CFEC30946C6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUANTITY"
+              DTS:DTSID="{A792A0C0-26FD-4387-B0DB-9CD69A10BAF3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BILLED_AMT"
+              DTS:DTSID="{C8CFA1B8-14C0-4ADB-8A9F-F52740D47B6C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NDC_CODE"
+              DTS:DTSID="{59D9D37E-A848-43F6-BA99-236E646DDE0D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RX_GENERIC_BRAND_IND"
+              DTS:DTSID="{11E69A05-9AB0-4F7A-9DC1-E574EA271783}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RX_SUPPLY_DAYS"
+              DTS:DTSID="{7D42D810-A441-4812-9074-E936809F0F06}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RX_DISPENSING_FEE_AMT"
+              DTS:DTSID="{97DCB991-B72D-4878-8995-3E20FCE78E15}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RX_INGREDIENT_AMT"
+              DTS:DTSID="{680D3438-2A13-435A-A43B-6363C6BB22DF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RX_FORMULARY_IND"
+              DTS:DTSID="{A1704540-C1F3-479D-804C-46E5DDBB23F8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RX_DATE_PRESCRIPTION_WRITTEN"
+              DTS:DTSID="{0B4C4458-1FAB-46B3-B2CC-6469029AA161}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{45F13C72-0A12-4B6C-ACB4-1B210ACD8088}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="iCntClmDetailRows">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT Claims Detail EXPORT"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{92d2bc3e-2eaf-457d-8f9a-3e8386093b13}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT Claims Detail EXPORT"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferMaxRows="1000"
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT Claims Detail EXPORT\CNT Exported Detail Records"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="CNT Exported Detail Records">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::iCntClmDetailRows</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DFT Claims Detail EXPORT\CNT Exported Detail Records.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Claims Detail EXPORT\CNT Exported Detail Records.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DFT Claims Detail EXPORT\CNT Exported Detail Records.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="FF_DST_Claims_detail_export">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[FF_CONN_ClmsDetsFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[FF_CONN_ClmsDetsFile]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[SEQ_CLAIM_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SEQ_CLAIM_ID"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[SEQ_CLAIM_ID]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEQ_CLAIM_ID]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[LINE_NUMBER]"
+                      cachedDataType="i2"
+                      cachedName="LINE_NUMBER"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[LINE_NUMBER]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[LINE_NUMBER]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[SUB_LINE_CODE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SUB_LINE_CODE"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[SUB_LINE_CODE]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[SUB_LINE_CODE]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[DETAIL_SVC_DATE]"
+                      cachedDataType="dbDate"
+                      cachedName="DETAIL_SVC_DATE"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[DETAIL_SVC_DATE]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[DETAIL_SVC_DATE]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[SVC_TO_DATE]"
+                      cachedDataType="dbDate"
+                      cachedName="SVC_TO_DATE"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[SVC_TO_DATE]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[SVC_TO_DATE]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[PROCEDURE_CODE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROCEDURE_CODE"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[PROCEDURE_CODE]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROCEDURE_CODE]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[MODIFIER_CODE_1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="MODIFIER_CODE_1"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[MODIFIER_CODE_1]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_1]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[MODIFIER_CODE_2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="MODIFIER_CODE_2"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[MODIFIER_CODE_2]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_2]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[MODIFIER_CODE_3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="MODIFIER_CODE_3"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[MODIFIER_CODE_3]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_3]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[MODIFIER_CODE_4]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="MODIFIER_CODE_4"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[MODIFIER_CODE_4]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_4]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[REVENUE_CODE]"
+                      cachedDataType="i2"
+                      cachedName="REVENUE_CODE"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[REVENUE_CODE]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[REVENUE_CODE]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[PLACE_OF_SVC_CODE1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="PLACE_OF_SVC_CODE1"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[PLACE_OF_SVC_CODE1]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PLACE_OF_SVC_CODE1]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[PLACE_OF_SVC_CODE2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="PLACE_OF_SVC_CODE2"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[PLACE_OF_SVC_CODE2]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PLACE_OF_SVC_CODE2]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[PLACE_OF_SVC_CODE3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="PLACE_OF_SVC_CODE3"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[PLACE_OF_SVC_CODE3]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PLACE_OF_SVC_CODE3]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[QUANTITY]"
+                      cachedDataType="numeric"
+                      cachedName="QUANTITY"
+                      cachedPrecision="12"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[QUANTITY]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[BILLED_AMT]"
+                      cachedDataType="cy"
+                      cachedName="BILLED_AMT"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[BILLED_AMT]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[BILLED_AMT]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[NDC_CODE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="NDC_CODE"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[NDC_CODE]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC_CODE]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[RX_GENERIC_BRAND_IND]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="RX_GENERIC_BRAND_IND"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_GENERIC_BRAND_IND]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_GENERIC_BRAND_IND]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[RX_SUPPLY_DAYS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="RX_SUPPLY_DAYS"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_SUPPLY_DAYS]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_SUPPLY_DAYS]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[RX_DISPENSING_FEE_AMT]"
+                      cachedDataType="cy"
+                      cachedName="RX_DISPENSING_FEE_AMT"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_DISPENSING_FEE_AMT]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_DISPENSING_FEE_AMT]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[RX_INGREDIENT_AMT]"
+                      cachedDataType="cy"
+                      cachedName="RX_INGREDIENT_AMT"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_INGREDIENT_AMT]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_INGREDIENT_AMT]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[RX_FORMULARY_IND]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="RX_FORMULARY_IND"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_FORMULARY_IND]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_FORMULARY_IND]" />
+                    <inputColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].Columns[RX_DATE_PRESCRIPTION_WRITTEN]"
+                      cachedDataType="dbDate"
+                      cachedName="RX_DATE_PRESCRIPTION_WRITTEN"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_DATE_PRESCRIPTION_WRITTEN]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_DATE_PRESCRIPTION_WRITTEN]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[SEQ_CLAIM_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SEQ_CLAIM_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[LINE_NUMBER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LINE_NUMBER" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[SUB_LINE_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SUB_LINE_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[DETAIL_SVC_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DETAIL_SVC_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[SVC_TO_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SVC_TO_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[PROCEDURE_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROCEDURE_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[MODIFIER_CODE_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MODIFIER_CODE_1" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[MODIFIER_CODE_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MODIFIER_CODE_2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[MODIFIER_CODE_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MODIFIER_CODE_3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[MODIFIER_CODE_4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MODIFIER_CODE_4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[REVENUE_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="REVENUE_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[PLACE_OF_SVC_CODE1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PLACE_OF_SVC_CODE1" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[PLACE_OF_SVC_CODE2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PLACE_OF_SVC_CODE2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[PLACE_OF_SVC_CODE3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PLACE_OF_SVC_CODE3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUANTITY" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[BILLED_AMT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="BILLED_AMT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[NDC_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NDC_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_GENERIC_BRAND_IND]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RX_GENERIC_BRAND_IND" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_SUPPLY_DAYS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RX_SUPPLY_DAYS" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_DISPENSING_FEE_AMT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RX_DISPENSING_FEE_AMT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_INGREDIENT_AMT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RX_INGREDIENT_AMT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_FORMULARY_IND]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RX_FORMULARY_IND" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input].ExternalColumns[RX_DATE_PRESCRIPTION_WRITTEN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RX_DATE_PRESCRIPTION_WRITTEN" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\DFT Claims Detail EXPORT\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Claims_Details]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [SEQ_CLAIM_ID]
+      ,[LINE_NUMBER]
+      ,[SUB_LINE_CODE]
+      ,[DETAIL_SVC_DATE]
+      ,[SVC_TO_DATE]
+      ,[PROCEDURE_CODE]
+      ,[MODIFIER_CODE_1]
+      ,[MODIFIER_CODE_2]
+      ,[MODIFIER_CODE_3]
+      ,[MODIFIER_CODE_4]
+      ,[REVENUE_CODE]
+      ,[PLACE_OF_SVC_CODE1]
+      ,[PLACE_OF_SVC_CODE2]
+      ,[PLACE_OF_SVC_CODE3]
+      ,[QUANTITY]
+      ,[BILLED_AMT]
+      ,[NDC_CODE]
+      ,[RX_GENERIC_BRAND_IND]
+      ,[RX_SUPPLY_DAYS]
+      ,[RX_DISPENSING_FEE_AMT]
+      ,[RX_INGREDIENT_AMT]
+      ,[RX_FORMULARY_IND]
+      ,[RX_DATE_PRESCRIPTION_WRITTEN]      
+  FROM [dbo].[Claims_Details]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{3D1B0341-403D-4032-B8CA-E171B06DEA6D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ace-sdv-db01.ACECAREDW_TEST]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEQ_CLAIM_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEQ_CLAIM_ID]"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEQ_CLAIM_ID]"
+                      name="SEQ_CLAIM_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[LINE_NUMBER]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LINE_NUMBER]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[LINE_NUMBER]"
+                      name="LINE_NUMBER"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[SUB_LINE_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SUB_LINE_CODE]"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[SUB_LINE_CODE]"
+                      name="SUB_LINE_CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[DETAIL_SVC_DATE]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DETAIL_SVC_DATE]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[DETAIL_SVC_DATE]"
+                      name="DETAIL_SVC_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[SVC_TO_DATE]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SVC_TO_DATE]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[SVC_TO_DATE]"
+                      name="SVC_TO_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROCEDURE_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROCEDURE_CODE]"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROCEDURE_CODE]"
+                      name="PROCEDURE_CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MODIFIER_CODE_1]"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_1]"
+                      name="MODIFIER_CODE_1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MODIFIER_CODE_2]"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_2]"
+                      name="MODIFIER_CODE_2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_3]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MODIFIER_CODE_3]"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_3]"
+                      name="MODIFIER_CODE_3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_4]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MODIFIER_CODE_4]"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[MODIFIER_CODE_4]"
+                      name="MODIFIER_CODE_4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[REVENUE_CODE]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REVENUE_CODE]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[REVENUE_CODE]"
+                      name="REVENUE_CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PLACE_OF_SVC_CODE1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PLACE_OF_SVC_CODE1]"
+                      length="10"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PLACE_OF_SVC_CODE1]"
+                      name="PLACE_OF_SVC_CODE1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PLACE_OF_SVC_CODE2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PLACE_OF_SVC_CODE2]"
+                      length="10"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PLACE_OF_SVC_CODE2]"
+                      name="PLACE_OF_SVC_CODE2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PLACE_OF_SVC_CODE3]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PLACE_OF_SVC_CODE3]"
+                      length="10"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[PLACE_OF_SVC_CODE3]"
+                      name="PLACE_OF_SVC_CODE3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[QUANTITY]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QUANTITY]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[QUANTITY]"
+                      name="QUANTITY"
+                      precision="12"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[BILLED_AMT]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BILLED_AMT]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[BILLED_AMT]"
+                      name="BILLED_AMT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC_CODE]"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC_CODE]"
+                      name="NDC_CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_GENERIC_BRAND_IND]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_GENERIC_BRAND_IND]"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_GENERIC_BRAND_IND]"
+                      name="RX_GENERIC_BRAND_IND"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_SUPPLY_DAYS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_SUPPLY_DAYS]"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_SUPPLY_DAYS]"
+                      name="RX_SUPPLY_DAYS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_DISPENSING_FEE_AMT]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_DISPENSING_FEE_AMT]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_DISPENSING_FEE_AMT]"
+                      name="RX_DISPENSING_FEE_AMT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_INGREDIENT_AMT]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_INGREDIENT_AMT]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_INGREDIENT_AMT]"
+                      name="RX_INGREDIENT_AMT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_FORMULARY_IND]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_FORMULARY_IND]"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_FORMULARY_IND]"
+                      name="RX_FORMULARY_IND"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_DATE_PRESCRIPTION_WRITTEN]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_DATE_PRESCRIPTION_WRITTEN]"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].Columns[RX_DATE_PRESCRIPTION_WRITTEN]"
+                      name="RX_DATE_PRESCRIPTION_WRITTEN"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEQ_CLAIM_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SEQ_CLAIM_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LINE_NUMBER]"
+                      dataType="i2"
+                      name="LINE_NUMBER" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SUB_LINE_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SUB_LINE_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DETAIL_SVC_DATE]"
+                      dataType="dbDate"
+                      name="DETAIL_SVC_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SVC_TO_DATE]"
+                      dataType="dbDate"
+                      name="SVC_TO_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROCEDURE_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROCEDURE_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MODIFIER_CODE_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="MODIFIER_CODE_1" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MODIFIER_CODE_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="MODIFIER_CODE_2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MODIFIER_CODE_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="MODIFIER_CODE_3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MODIFIER_CODE_4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="MODIFIER_CODE_4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REVENUE_CODE]"
+                      dataType="i2"
+                      name="REVENUE_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PLACE_OF_SVC_CODE1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PLACE_OF_SVC_CODE1" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PLACE_OF_SVC_CODE2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PLACE_OF_SVC_CODE2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PLACE_OF_SVC_CODE3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PLACE_OF_SVC_CODE3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QUANTITY]"
+                      dataType="numeric"
+                      name="QUANTITY"
+                      precision="12"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BILLED_AMT]"
+                      dataType="cy"
+                      name="BILLED_AMT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="NDC_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_GENERIC_BRAND_IND]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RX_GENERIC_BRAND_IND" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_SUPPLY_DAYS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RX_SUPPLY_DAYS" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_DISPENSING_FEE_AMT]"
+                      dataType="cy"
+                      name="RX_DISPENSING_FEE_AMT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_INGREDIENT_AMT]"
+                      dataType="cy"
+                      name="RX_INGREDIENT_AMT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_FORMULARY_IND]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RX_FORMULARY_IND" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RX_DATE_PRESCRIPTION_WRITTEN]"
+                      dataType="dbDate"
+                      name="RX_DATE_PRESCRIPTION_WRITTEN" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEQ_CLAIM_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEQ_CLAIM_ID]"
+                      name="SEQ_CLAIM_ID" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LINE_NUMBER]"
+                      dataType="i2"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LINE_NUMBER]"
+                      name="LINE_NUMBER" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SUB_LINE_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SUB_LINE_CODE]"
+                      name="SUB_LINE_CODE" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DETAIL_SVC_DATE]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DETAIL_SVC_DATE]"
+                      name="DETAIL_SVC_DATE" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SVC_TO_DATE]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SVC_TO_DATE]"
+                      name="SVC_TO_DATE" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROCEDURE_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROCEDURE_CODE]"
+                      name="PROCEDURE_CODE" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MODIFIER_CODE_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MODIFIER_CODE_1]"
+                      name="MODIFIER_CODE_1" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MODIFIER_CODE_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MODIFIER_CODE_2]"
+                      name="MODIFIER_CODE_2" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MODIFIER_CODE_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MODIFIER_CODE_3]"
+                      name="MODIFIER_CODE_3" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MODIFIER_CODE_4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MODIFIER_CODE_4]"
+                      name="MODIFIER_CODE_4" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REVENUE_CODE]"
+                      dataType="i2"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REVENUE_CODE]"
+                      name="REVENUE_CODE" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PLACE_OF_SVC_CODE1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PLACE_OF_SVC_CODE1]"
+                      name="PLACE_OF_SVC_CODE1" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PLACE_OF_SVC_CODE2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PLACE_OF_SVC_CODE2]"
+                      name="PLACE_OF_SVC_CODE2" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PLACE_OF_SVC_CODE3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PLACE_OF_SVC_CODE3]"
+                      name="PLACE_OF_SVC_CODE3" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QUANTITY]"
+                      dataType="numeric"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QUANTITY]"
+                      name="QUANTITY"
+                      precision="12"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BILLED_AMT]"
+                      dataType="cy"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BILLED_AMT]"
+                      name="BILLED_AMT" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC_CODE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC_CODE]"
+                      name="NDC_CODE" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_GENERIC_BRAND_IND]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_GENERIC_BRAND_IND]"
+                      name="RX_GENERIC_BRAND_IND" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_SUPPLY_DAYS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_SUPPLY_DAYS]"
+                      name="RX_SUPPLY_DAYS" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_DISPENSING_FEE_AMT]"
+                      dataType="cy"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_DISPENSING_FEE_AMT]"
+                      name="RX_DISPENSING_FEE_AMT" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_INGREDIENT_AMT]"
+                      dataType="cy"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_INGREDIENT_AMT]"
+                      name="RX_INGREDIENT_AMT" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_FORMULARY_IND]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_FORMULARY_IND]"
+                      name="RX_FORMULARY_IND" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_DATE_PRESCRIPTION_WRITTEN]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RX_DATE_PRESCRIPTION_WRITTEN]"
+                      name="RX_DATE_PRESCRIPTION_WRITTEN" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT Claims Detail EXPORT.Paths[OLE DB Source Output]"
+              endId="Package\DFT Claims Detail EXPORT\CNT Exported Detail Records.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\DFT Claims Detail EXPORT\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT Claims Detail EXPORT.Paths[Row Count Output 1]"
+              endId="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export.Inputs[Flat File Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\DFT Claims Detail EXPORT\CNT Exported Detail Records.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="216,42"
+          Id="Package\DFT Claims Detail EXPORT"
+          TopLeft="527,167" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT Claims Detail EXPORT">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="229,42"
+          Id="Package\DFT Claims Detail EXPORT\FF_DST_Claims_detail_export"
+          TopLeft="349,282" />
+        <NodeLayout
+          Size="224,42"
+          Id="Package\DFT Claims Detail EXPORT\CNT Exported Detail Records"
+          TopLeft="411,167" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\DFT Claims Detail EXPORT\OLE DB Source"
+          TopLeft="378,55" />
+        <EdgeLayout
+          Id="Package\DFT Claims Detail EXPORT.Paths[Row Count Output 1]"
+          TopLeft="523,209">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-59.5,73"
+              Start="0,0"
+              End="-59.5,65.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.5"
+                    Point2="0,36.5"
+                    Point3="-4,36.5" />
+                  <mssgle:LineSegment
+                    End="-55.5,36.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-55.5,36.5"
+                    Point2="-59.5,36.5"
+                    Point3="-59.5,40.5" />
+                  <mssgle:LineSegment
+                    End="-59.5,65.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT Claims Detail EXPORT.Paths[OLE DB Source Output]"
+          TopLeft="453,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="70,70"
+              Start="0,0"
+              End="70,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31"
+                    Point2="0,35"
+                    Point3="4,35" />
+                  <mssgle:LineSegment
+                    End="66,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="66,35"
+                    Point2="70,35"
+                    Point3="70,39" />
+                  <mssgle:LineSegment
+                    End="70,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Claims Detail EXPORT\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
